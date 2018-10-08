@@ -1,0 +1,355 @@
+﻿
+@{
+    ViewBag.Title = "Group";
+}
+
+<section class="content">
+    <!-- Modal -->
+    <div class="modal fade" id="myModal5" @*tabindex="-1"*@ role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="height:415px">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Edit Group User</h4>
+                </div>
+                <div class="modal-body">
+                    <!-- /.box-header -->
+                    <form role="form" method="post" action="~/Home/groupuseredit" enctype="multipart/form-data">
+                        <!-- text input -->
+                        <div class="form-group ">
+                            <label>GroupName<span class="error"> * </span></label>
+                            <input type="text" name="GROUP_NAME" id="GROUP_NAME4"  required class="form-control" placeholder="Enter Group  Name">
+                            <!-- <span class="help-block error">* User Name Already Exist</span> -->
+                        </div>
+
+                        <div class="col-md-4">
+                            @*<select class="form-control select2"  name="MEMBER_NAME" id="GROUP_NAME2" multiple="multiple" style="height:100px;width:100px">
+                                <option value="0">Select Member</option>
+                                @if (ViewBag.memlist != null)
+                                {                                   
+                                    foreach (var data in ViewBag.memlist)
+                                    {
+                                        <option value="@data.FIRSTNAME">@data.FIRSTNAME</option>
+                                    }
+                                }
+                            </select>*@
+
+                            <select name="MEMBER_NAME" id="GROUP_NAME2"  class="form-control select2" dir="ltr" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                               @if (ViewBag.memlist != null)
+                               {
+                                foreach (var item in ViewBag.memlist)
+                                {
+                                    <option value="@item.FIRSTNAME">@item.FIRSTNAME</option>
+                                }
+                               }
+                            </select>
+                        </div>
+
+
+                        @*<div class="form-group">
+                                <label>Member Name<span class="error"> * </span></label>
+                                <select name="MEMBER_NAME" id="MEMBER_NAME2" class="form-control select2-container select2-container--default" dir="ltr" style="width: 100%;">
+                                    @foreach (var item in ViewBag.group3)
+                                    {
+                                        <option value="@item.Id">@item.MEMBER_NAME</option>
+                                    }
+                                </select>
+                        </div>*@
+
+                        <div class="box-footer">
+                            <input type="hidden" id="hdnid5" name="Id" />
+                            <input type="submit" class="btn btn-success pull-right" value="Update Groups" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal1" @*tabindex="-1"*@ role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="height:315px">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Edit Notification</h4>
+                </div>
+                <div class="modal-body">
+                    <!-- /.box-header -->
+                    <form role="form" method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label>Member Name<span class="error"> * </span></label>
+                            <div>
+                                <input type="text" disabled id="mydata" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                IsAdmin:
+                            </label>
+                            <div>
+                                <input type="radio" style="display:inline" id="r1" name="ADMIN" value="Yes" />Yes
+                                <input type="radio" style="display:inline" id="r2" name="ADMIN" value="No"  />No
+                            </div>
+                        </div>
+
+                    
+                        <div class="box-footer">
+                            <input type="hidden" id="hdnid3" name="Id" />
+                            <input type="submit" class="btn btn-success pull-right" value="Update Notification" />
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Info boxes -->
+    <div class="box">
+        <div class="box-header">
+            <h3 class="box-title">Group Members</h3>            
+          
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+            <table id="fileTable" class="table table-bordered dataTable" role="grid" aria-describedby="fileTable_info">
+                <thead>
+                    <tr>
+                        <th>SR_No</th>
+                        <th>Group Name</th>
+                        <th>Member Name</th>
+                        <th  class="hide_me display_all">Add User</th>                         
+                        <th>ADMIN</th>
+                        <th>Is Joined</th>
+                        <th class="hide_me display_all">Action</th>
+                    </tr>
+                </thead>
+                 <tbody>
+                    @{int i = 1;}
+                    @foreach (var item in ViewBag.work)
+                    {
+                        <tr>
+                            @{int rowspan = item.Value.Count + 1;}
+                            <td rowspan="@rowspan">@i</td>
+                            <td rowspan="@rowspan">
+                                @item.Key
+                            </td>
+
+                        </tr>
+                                i++;
+                                foreach (var data in item.Value)
+                                {
+                                        <tr>                                         
+                                            <td id="membername_@data.Id">
+                                                @data.MEMBER_NAME                                              
+                                                <span id="groupname_@data.Id" class="hidden" >@data.GROUP_NAME</span>
+                                            </td>
+
+                                            <td  class="hide_me display_all">
+                                                @data.MESSAGE
+                                                <a  onclick="OpenDialog2(@data.Id)" style="display:inline" data-toggle="modal" data-target="#myModal5"> &nbsp; <i class="fa fa-user-plus"></i> </a>
+                                            </td>
+
+                                            <td  id="admin_@data.Id">
+                                                @data.ADMIN
+                                            </td>
+
+                                            <td id="notify_@data.Id">
+                                                @if(data.IS_NOTIFY==false)
+                                                {
+                                                    <span>Pending</span>
+                                                }
+                                                else if(data.IS_NOTIFY == null)
+                                                {
+                                                    <span>No</span>
+                                                }
+                                                else if (data.IS_NOTIFY == true)
+                                                {
+                                                    <span>Yes</span>
+                                                }
+
+                                            </td>
+
+                                            <td class="hide_me display_all">
+                                                <a onclick="OpenDialog(@data.Id)" style="display:inline" data-toggle="modal" data-target="#myModal1" type="button"> <i class="fa fa-edit"></i></a>
+                                                <a style="display:inline" onclick="Delete(@data.Id,'del')"> &nbsp; <i class="fa fa-trash"></i> </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                </tbody>                
+            </table>
+        </div>
+    </div>
+    <!-- /.row -->
+</section>
+
+@*<script>
+
+    function OpenDialog(id) {
+
+        var membername = $('#membername_' + id).text().trim();
+        var admin = $('#admin_' + id).text().trim();
+            
+        if (admin == 'Yes') {
+            $('input:radio[name=ADMIN]')[0].checked = true;
+
+        }
+        else {
+            $('input:radio[name=ADMIN]')[1].checked = true;
+        }
+
+        //var isnotify = $('#notify_' + id).text().trim();
+        //if (isnotify == 'Yes') {
+        //    $('input:radio[name=IS_NOTIFY]')[0].checked = true;
+        //}
+        //else {
+        //    $('input:radio[name=IS_NOTIFY]')[1].checked = true;
+        //}
+
+        $('#mydata').val(membername);
+        $('#admin_').val(admin);
+        //$('#notify_').val(isnotify);
+        $('#hdnid3').val(id);
+        }
+</script>*@
+
+<script>
+    function OpenDialog2(id) {
+        var i = 0;
+        var Add =
+                   {
+                       ID : id,
+                   }
+
+        var Gid = $('#groupid_' + id).text();         
+        $('#hdnid5').val(id);
+
+        var groupname = $('#groupname_' + id).text().trim();
+        $('#GROUP_NAME4').val(groupname);
+
+                $.ajax({
+                url: '/Home/loadmemlist2/' + id,
+                type: 'GET',
+                dataType: "JSON",
+                success: function (data) {
+                    $("#GROUP_NAME2").empty();
+                   
+                    $.each(data, function (index, values) {
+                        $.each(values, function (index, value) {
+                           
+                        $('#GROUP_NAME2').append('<option value="' + value.MEMBERLIST + '">' + value.MEMBERLIST + '</option>');
+                        i++;
+                    });
+                    });
+
+                }
+            });
+        }
+</script>
+<script>
+
+    function OpenDialog(id) {
+
+        var membername = $('#membername_' + id).text().trim();
+        var admin = $('#admin_' + id).text().trim();
+
+        if (admin == 'Yes') {
+            $('input:radio[name=ADMIN]')[0].checked = true;
+
+        }
+        else {
+            $('input:radio[name=ADMIN]')[1].checked = true;
+        }
+
+        //var isnotify = $('#notify_' + id).text().trim();
+        //if (isnotify == 'Yes') {
+        //    $('input:radio[name=IS_NOTIFY]')[0].checked = true;
+        //}
+        //else {
+        //    $('input:radio[name=IS_NOTIFY]')[1].checked = true;
+        //}
+
+        $('#mydata').val(membername);
+        $('#admin_').val(admin);
+        //$('#notify_').val(isnotify);
+        $('#hdnid3').val(id);
+        }
+</script>
+@*<script>
+    function OpenDialog(id) {
+        $('#hdnid3').val("");
+        $('#MEMBER_ID_').val("");
+        var Add =
+                   {
+                       ID: id,
+                   }
+
+        $.ajax({
+                url: '/Home/getnotification/' + id,
+                type: 'GET',
+
+                success: function (data) {
+                    
+                    $('#hdnid3').val(data.data.Id);
+                    $('#mydata').val(data.data.MEMBER_NAME);
+                    
+                    //$('#r1').val(data.data.ADMIN);                
+                    //$('#r3').val(data.data.IS_NOTIFY);
+                }
+            });
+        }
+</script>*@ 
+@*<style>
+    .select2-search input {
+    width: 100%;
+    min-height: 26px;
+    font-family: sans-serif;
+    font-size: 1em;
+    box-shadow: none;
+    height: auto;
+    padding: 4px 20px 4px 5px;
+    margin: 0px;
+    outline: 0px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(170, 170, 170);
+    border-image: initial;
+    border-radius: 0px;
+    background: url(select2.png) 100% -22px no-repeat, linear-gradient(rgb(255, 255, 255) 85%, rgb(238, 238, 238) 99%) 0px 0px;
+}
+</style>*@  
+<script>
+    $(document).ready(function () { $("#GROUP_NAME2").select2(); });
+</script>
+
+<script>
+
+    function Delete(id,del)
+    {
+        if (confirm("Are you sure Delete this Record?")) {
+            var deletes =
+               {
+                   ID : id,
+                   n_del : del,
+               }
+            {
+                $.ajax({
+                    url: '/Home/delete/',
+                    data: JSON.stringify(deletes),
+                    type: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        $('#row_' + id).hide();
+                    }
+                });
+            }
+        }
+        return false;
+    }
+
+</script>

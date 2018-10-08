@@ -1,0 +1,458 @@
+﻿
+@{
+    ViewBag.Title = "Familymember";
+}
+
+
+<section class="content">
+    <div class="modal fade" id="myModal5" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="height:550px">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Add Member Details </h4>
+                </div>
+                <div class="modal-body">
+                    <!-- /.box-header -->
+                    <form role="form" method="post">
+                        <div class="form-group ">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <label>Firstname</label>
+                                    <input type="text" name="FIRSTNAME" required class="form-control" placeholder="Enter Firstname">
+                                </div>
+                                <div class="col-xs-6">
+                                    <label>Surname</label>
+                                    <input type="text" name="SURNAME" required class="form-control" placeholder="Enter Surname">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group ">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <label>Email</label>
+                                    <input type="email" name="EMAIL" required class="form-control" placeholder="Enter Email">
+                                </div>
+                                <div class="col-xs-6">
+                                    <label>Password</label>
+                                    <input type="password" name="PASSWORD" required class="form-control" placeholder="Enter Password">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <label>Mobile1</label>
+                                    <input type="text" name="MOBILE1" id="phone1" maxlength="10" OnClientClick="javascript:return numbersonly();" onkeypress="phoneno()" required class="form-control" placeholder="Enter Mobile">
+                                </div>
+                                <div class="col-xs-6">
+                                    <label>Mobile2</label>
+                                    <input type="text" name="MOBILE2" id="phone2" maxlength="14" onkeypress="phoneno()" required class="form-control" placeholder="Enter Mobile2">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <label>Date of Birth</label>
+                                    <input type="text" name="DOB" class="form-control" id="datepicker3">
+                                </div>
+
+                                <div class="col-xs-6">
+                                    <label>BloodGroup</label>
+                                    <input type="text" name="BLOODGROUP" required class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group ">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <label>Education<span class="error">  </span></label>
+                                    <input type="text" name="EDUCATION" required class="form-control" placeholder="Enter Education">
+                                </div>
+
+                                <div class="col-xs-6">
+                                    <label>Relationship</label>
+                                    @*<input type="text" name="RELATIONSHIP" required class="form-control">*@
+                                    <select name="RELATIONSHIP" class="form-control select2-container select2-container--default" dir="ltr" style="width: 100%;">
+                                        <option selected value="17">SELF</option>
+                                        @foreach (var item in ViewBag.relationship)
+                                        {
+                                            <option value="@item.Id">@item.RELATIONSHIP</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- <span class="help-block error">* User Name Already Exist</span> -->
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputFile">Image upload</label>
+                            <input type="file" name="IMAGE" id="files">
+                        </div>
+
+                        <div class="box-footer">
+                            <input type="submit" class="btn btn-success pull-right" value="Add Member Details" />
+                        </div>
+                    </form>
+                    <!-- /.box-body -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="height:340px">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Edit Member Details </h4>
+                </div>
+                <div class="modal-body">
+                    <!-- /.box-header -->
+                    <form role="form" method="post">
+                        <div class="form-group ">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <label>Firstname</label>
+                                    <input type="text" name="FIRSTNAME" id="FIRSTNAME" required class="form-control" placeholder="Enter Firstname">
+                                </div>
+                                <div class="col-xs-6">
+                                    <label>Email</label>
+                                    <input type="email" name="EMAIL" id="email2" required class="form-control" placeholder="Enter Email">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <label>Mobile1</label>
+                                    <input type="text" name="MOBILE1" id="MOBILE1" maxlength="10" onkeypress="phoneno()" required class="form-control" placeholder="Enter Mobile">
+                                </div>
+                                <div class="col-xs-6">
+                                    <label>Date of Birth</label>
+                                    <input type="text" name="DOB" class="form-control" id="datepicker2">
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group ">
+                            <label>Education<span class="error">  </span></label>
+                            <input type="text" name="EDUCATION" id="EDUCATION" required class="form-control" placeholder="Enter Education">
+                            <!-- <span class="help-block error">* User Name Already Exist</span> -->
+                        </div>
+
+                        <div class="box-footer">
+                            <input type="hidden" id="hdnid3" name="Id" />
+                            <input type="submit" class="btn btn-success pull-right" value="Edit Address Details" />
+                        </div>
+                    </form>
+                    <!-- /.box-body -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <!-- Info boxes -->
+    <div class="box">
+        <div class="box-header">
+            <a data-toggle="modal" data-target="#myModal5" type="button" class="btn btn-primary hide_me display_all" style="float: right;">Add Member</a>
+        </div>
+
+        <div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content" style="height:440px">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Add Group Details </h4>
+                    </div>
+                    <div class="modal-body">
+                        <!-- /.box-header -->
+                        <form method="post" action="~/Home/groupuser">  
+                            <div class="form-group ">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <label>Group  Name</label>s
+                                        <input type="text" name="GROUP_NAME" id="GROUP_NAME" required class="form-control" placeholder="Enter Group Name">
+                                    </div>
+                                </div>
+                            </div>                                                                    
+
+                            <div class="form-group">
+                                <div class="control-label col-md-2">
+                                    <label>
+                                        Members
+                                    </label>
+                                </div>
+                                <div class="col-md-4">
+                                    <select name="MEMBER_NAME" id="MEMBER_NAME" multiple="multiple" style="height:100px;width:100px">
+
+                                        @foreach (var data in ViewBag.member)
+                                        {
+                                            <option value="@data.FIRSTNAME">@data.FIRSTNAME</option>
+                                        }
+                                    </select>
+
+                                </div>
+                            </div>
+
+
+                            @*<div class="form-group">
+                                <div class="control-label col-md-6">
+                                    IsAdmin
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="radio" name="ISADMIN" value="Yes"  />Yes
+                                    <input type="radio" name="ISADMIN" value="No" checked/>No
+                                </div>
+                            </div>*@
+
+                            @*<div class="form-group">
+                                <label>
+                                    IsAdmin:
+                                </label>
+                                <div>
+                                    <input type="radio" style="display:block" name="ISADMIN"  value="Yes" />Yes
+                                    <input type="radio" style="display:block"  name="ISADMIN"  value="No" checked/>No
+                                </div>
+                            </div>*@
+
+                            <div class="form-group">
+                                <label>
+                                    IsNotify:
+                                </label>
+                                <div>
+                                    <input type="radio" style="display:block" name="ISNOTIFY"  value="True" />Yes
+                                    <input type="radio" style="display:block" name="ISNOTIFY"  value="False" />No
+                                </div>
+                            </div>
+
+                            <div class="box-footer">
+                                <input type="hidden" id="hdnid4" name="Id" />
+                                <input type="submit" class="btn btn-success pull-right" value="Add Group" />
+                            </div>
+                        </form>
+                        <!-- /.box-body -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        <!-- /.box-header -->
+        <div class="box-body">
+            <input type="submit" class="display_all hide_me" id="create" name="create group" data-toggle="modal" data-target="#myModal4" onclick="creategroup()" value="create group" />
+          <a href="~/Home/treenode" class="button hide_me">Create tree</a>
+                @*<input type="button" class="display_all hide_me" id="tree" name="create tree" value="create tree" />*@
+           
+            <table id="fileTable" class="table table-bordered  dataTable" role="grid" aria-describedby="fileTable_info">
+
+                <thead>
+                    <tr>
+                        <th>SR_No</th>
+                        <th>Firstname</th>
+                        <th>Email</th>
+
+                        <th>DOB</th>
+                        <th>Education</th>
+
+                        <th class="hide_me display_all">Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @{int i = 1;}
+                    @foreach (var item in ViewBag.member)
+                    {
+                        <tr id="row_@item.Id">
+
+                            <td>
+                                <span>@i</span>
+                            </td>
+                            <td>                                
+                                    @item.FIRSTNAME                                    
+                            </td>
+
+                            <td>
+                                @item.EMAIL
+                            </td>
+
+                            <td id="DOB_@item.Id">
+
+                                @if (item.DOB != null)
+                                {
+                                    @item.DOB.ToShortDateString()
+                                }
+                                else
+                                {
+                                    @item.DOB
+                                }
+                            </td>
+
+                            <td>
+                                @item.EDUCATION
+                            </td>
+
+                            <td class="hide_me display_all">
+                                <a onclick="OpenDialog(@item.Id)" data-toggle="modal" data-target="#myModal1" type="button"> <i class="fa fa-edit"></i></a>
+                                <a style="display:inline" onclick="Delete(@item.Id,'del')"> &nbsp; <i class="fa fa-trash"></i> </a>
+                                <a href="~/Home/memberdetails/@item.Id">| Details</a>
+                            </td>
+
+                        </tr>
+                        i++;
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+
+<style type="text/css" media="screen">
+    .file-hover {
+        position: relative;
+        min-width: 100px;
+    }
+
+    .file-block {
+        position: absolute;
+        display: block;
+        left: 64px;
+        top: 10px;
+        z-index: 2000;
+    }
+
+    .file-block-inside {
+        padding: 10px;
+        background-color: #fff;
+        border-radius: 2px;
+        border: 1px solid #e7e7e7;
+        display: flex;
+    }
+
+        .file-block-inside > .block-hover {
+            height: 40px;
+            width: 40px;
+            margin-right: 4px;
+            text-align: center;
+            font-weight: 700;
+        }
+
+            .file-block-inside > .block-hover p {
+                top: 10px;
+                font-size: 10px;
+                position: relative;
+            }
+
+    .file-block .ht-status {
+        width: 160px;
+    }
+</style>
+
+
+
+<script>
+    function createtree() {
+
+        $.ajax({
+            url: '/Home/tree/',
+            type: 'POST',
+
+            success: function (data) {
+
+
+            }
+        });
+    }
+</script>
+
+<script>
+    $(function () {
+        $('.file-hover').hover(
+            function () {
+                $(this).find('.file-block').removeClass('hidden');
+
+            }, function () {
+
+                $(this).find('.file-block').addClass('hidden');
+            })
+    });
+</script>
+
+<script>
+    function OpenDialog(id) {
+        var Add =
+                   {
+                       ID: id,
+                   }
+
+
+        var Dob = $('#DOB_' + id).text().trim();
+        $('#datepicker2').val(Dob);
+
+        $.ajax({
+            url: '/Home/getmember/' + id,
+            type: 'GET',
+            success: function (data) {
+
+                $('#hdnid3').val(data.data.Id);
+                $('#FIRSTNAME').val(data.data.FIRSTNAME);
+                $('#email2').val(data.data.EMAIL);
+                $('#MOBILE1').val(data.data.MOBILE1);
+                // $('#datepicker2').val(data.data.datepicker2);
+                $('#EDUCATION').val(data.data.EDUCATION);
+            }
+        });
+    }
+</script>
+
+
+
+<script>
+    function phoneno() {
+        $('#phone1,#phone2,#MOBILE1,#MOBILE2').keypress(function (e) {
+            var a = [];
+            var k = e.which;
+
+            for (i = 48; i < 58; i++)
+                a.push(i);
+
+            if (!(a.indexOf(k) >= 0))
+                e.preventDefault();
+        });
+    }
+</script>
+
+<script>
+    function Delete(id, del) {
+        if (confirm("Are you sure Delete this Record?")) {
+            var deletes =
+               {
+                   ID: id,
+                   m_del: del,
+               }
+            {
+                $.ajax({
+                    url: '/Home/delete/',
+                    data: JSON.stringify(deletes),
+                    type: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        $('#row_' + id).hide();
+                    }
+                });
+            }
+        }
+        return false;
+    }
+
+</script>

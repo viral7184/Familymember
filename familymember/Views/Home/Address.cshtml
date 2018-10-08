@@ -1,0 +1,244 @@
+﻿@*@model IEnumerable<familymember.Models.tbl_address>*@
+
+@{
+    ViewBag.Title = "Address";
+}
+
+<section class="content">   
+    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="height:440px">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Add Address Details </h4>
+                </div>
+                <div class="modal-body">
+                    <!-- /.box-header -->
+                    <form role="form" method="post">
+                        <div class="form-group">
+                            <label>Member Name<span class="error"> * </span></label>
+                            <select name="MEMBER_ID" class="form-control select2-container select2-container--default" dir="ltr" style="width: 100%;">
+                                @foreach (var item in ViewBag.member)
+                                {
+                                    <option value="@item.Id">@item.FIRSTNAME</option>
+                                }
+                            </select>
+                        </div>
+                        
+                        <div class="form-group ">
+                            <label>Street<span class="error">  </span></label>
+                            <input type="text" name="STREET" required class="form-control" placeholder="Enter street Name">
+                            <!-- <span class="help-block error">* User Name Already Exist</span> -->
+                        </div>
+                        <div class="form-group ">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <label>City</label>
+                                    <input type="text" name="CITY" required class="form-control" placeholder="Enter City Name">
+                                </div>
+                                <div class="col-xs-6">
+                                    <label>State</label>
+                                    <input type="text" name="STATE" required class="form-control" placeholder="Enter State Name">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- text input -->
+                        <div class="form-group ">
+                            <label>Pincode</label>
+                            <input type="number"  name="PINCODE" class="form-control" placeholder="Enter Pincode ">
+                            <!-- <span class="help-block error">* User Name Already Exist</span> -->
+                        </div>
+                        <!-- text input -->
+
+
+                        <div class="box-footer">
+                            <input type="submit" class="btn btn-success pull-right" value="Add Address Details" />
+                        </div>
+                    </form>
+                    <!-- /.box-body -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="height:440px">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Edit Address Details </h4>
+                </div>
+                <div class="modal-body">
+                    <!-- /.box-header -->
+                    <form role="form" method="post">
+
+                        <div class="form-group">
+                            <label>Member Name<span class="error"> * </span></label>
+                            <select name="MEMBER_ID" id="MEMBER_ID_" class="form-control select2-container select2-container--default" dir="ltr" style="width: 100%;">
+                                @foreach (var item in ViewBag.member)
+                                {
+                                    <option value="@item.Id">@item.FIRSTNAME</option>
+                                }
+                            </select>
+                        </div>
+
+                        <div class="form-group ">
+                            <label>Street<span class="error">  </span></label>
+                            <input type="text" name="STREET" id="STREET" required class="form-control" placeholder="Enter street Name">
+                              <!-- <span class="help-block error">* User Name Already Exist</span> -->
+                        </div>
+                        <div class="form-group ">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <label>City</label>
+                                    <input type="text" name="CITY" id="CITY" required class="form-control" placeholder="Enter City Name">
+                                </div>
+                                <div class="col-xs-6">
+                                    <label>State</label>
+                                    <input type="text" name="STATE" id="STATE" required class="form-control" placeholder="Enter State Name">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- text input -->
+                        <div class="form-group ">
+                            <label>Pincode</label>
+                            <input type="number" name="PINCODE" id="PINCODE" class="form-control" placeholder="Enter Pincode">
+                            <!-- <span class="help-block error">* User Name Already Exist</span> -->
+                        </div>
+                        <!-- text input -->
+
+
+                        <div class="box-footer">
+                            <input type="hidden" id="hdnid2" name="Id" />
+                            <input type="submit" class="btn btn-success pull-right" value="Update Address Details" />
+                        </div>
+                    </form>
+                    <!-- /.box-body -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+ 
+
+    <!-- Info boxes -->
+    <div class="box">
+        <div class="box-header">
+            <h3 class="box-title">Address List</h3>
+           
+            <a  data-toggle="modal"  data-target="#myModal2" type="button" class="btn btn-primary hide_me display_all" style="float: right;">Add New Address</a>
+           
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+            <table id="fileTable" class="table table-bordered  dataTable" role="grid" aria-describedby="fileTable_info">
+
+                <thead>
+                    <tr>
+                        <th>SR_No</th>  
+                        <th>Member Name</th>                      
+                        <th>Street</th>
+                        <th>City</th>
+                        <th>State</th>
+                        <th>Pincode</th>
+                        <th class="hide_me display_all">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{int i = 1;}
+                        @foreach (var item in ViewBag.addr)
+                        {
+                            <tr id="row_@item.Id">
+                                <td>
+                                    <span>@i</span>         
+                                </td>
+                                <td>
+                                    <a href="~/Home/Mainmember/@item.tbl_member.Id"> @item.tbl_member.FIRSTNAME</a>
+                                    @*@item.tbl_member.FIRSTNAME*@
+                                    @*<span class="hidden" id="MEMBER_ID_@item.Id">@item.MEMBER_ID</span>*@
+                                </td>
+
+                                <td id="street_@item.Id">
+                                    @item.STREET
+                                </td>
+                                <td id="city_@item.Id">
+                                    @item.CITY
+                                </td>
+                                <td id="state_@item.Id">
+                                    @item.STATE
+                                </td>
+                                <td id="pincode_@item.Id">
+                                    @item.PINCODE
+                                </td>
+                                
+                                <td class="hide_me display_all">
+                                    <a onclick="OpenDialog(@item.Id)" data-toggle="modal" data-target="#myModal1" type="button"> <i class="fa fa-edit"></i></a>
+
+                                    <a style="display:inline"  onclick="Delete(@item.Id,'del')"> &nbsp; <i class="fa fa-trash"></i> </a>
+                                </td>
+
+                            </tr>
+                            i++;
+                        }
+                    </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<script>
+    function OpenDialog(id) {
+        $('#hdnid2').val("");
+        $('#MEMBER_ID_').val("");
+        $('#STREET').val("");
+        $('#CITY').val("");
+        $('#STATE').val("");
+        $('#PINCODE').val("");
+        var Add =
+                   {
+                       ID : id,
+                   }
+
+            $.ajax({
+                url: '/Home/getaddress/' + id,
+                type: 'GET',
+
+                success: function (data) {
+
+                    $('#hdnid2').val(data.data.Id);
+                    $('#MEMBER_ID_').val(data.data.MEMBER_ID);
+                    $('#STREET').val(data.data.STREET);
+                    $('#CITY').val(data.data.CITY);
+                    $('#STATE').val(data.data.STATE);
+                    $('#PINCODE').val(data.data.PINCODE);                    
+                }
+            });
+        }
+</script>
+
+<script>
+    function Delete(id,del)
+    {
+        if (confirm("Are you sure Delete this Record?")) {
+            var deletes =
+               {
+                   ID : id,
+                   add_del: del,
+               }
+            {
+                $.ajax({
+                    url: '/Home/delete/',
+                    data: JSON.stringify(deletes),
+                    type: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        $('#row_' + id).hide();
+                    }
+                });
+            }
+        }
+        return false;
+    }
+
+</script>
+

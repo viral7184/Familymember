@@ -1,0 +1,120 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Visual Admin - Login</title>
+    <meta name="description" content="">
+    <meta name="author" content="templatemo">
+    <!--
+    Visual Admin Template
+    http://www.templatemo.com/preview/templatemo_455_visual_admin
+    -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,700' rel='stylesheet' type='text/css'>
+    <link href="~/css/font-awesome.min.css" rel="stylesheet">
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/css/templatemo-style.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="height:190px">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="myModalLabel">forgot password</h4>
+            </div>
+            <div class="modal-body">
+                <!-- /.box-header -->
+                <form role="form" method="post" action="~/Home/forgotpasswrd">
+                    <div class="form-group ">
+                        <label>Member Email</label>
+                        <input type="text" name="EMAIL" id="EMAIL" class="form-control" placeholder="Enter Member Email">
+                        <!-- <span class="help-block error">* User Name Already Exist</span> -->
+                    </div>
+
+                    <div class="box-footer">
+                        <input type="hidden" id="hide" name="ID" />
+                        <button type="submit" class="btn btn-info pull-right">submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<body class="light-gray-bg">
+    <div class="templatemo-content-widget templatemo-login-widget white-bg">
+        <header class="text-center">
+            <div class="square"></div>
+            <h1>Visual Admin</h1>
+        </header>
+        <form role="form" method="post" class="templatemo-login-form">
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon"><i class="fa fa-user fa-fw"></i></div>
+                    <input type="text" name="EMAIL" class="form-control" placeholder="Enter Email">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon"><i class="fa fa-key fa-fw"></i></div>
+                    <input type="password" name="PASSWORD" class="form-control" placeholder="Enter password" />
+                </div>
+            </div>
+            @*<div class="form-group">
+                <div class="checkbox squaredTwo">
+                    <input type="checkbox" id="c1" name="cc" />
+                    <label for="c1"><span></span>Remember me</label>
+                </div>
+            </div>*@
+            <div class="form-group" style="padding:20px">
+                <button type="submit" class="templatemo-blue-button width-100">Login</button>
+            </div>
+          
+            <div style="color:red">
+                @if (TempData["msg"] != null)
+                {
+                    @TempData["msg"];
+                }
+                else if (TempData["msgs"] != null)
+                {
+                    @TempData["msgs"]
+                }
+                else if (Session["check_email"] != null)
+                {
+                    @Session["check_email"]
+                }   
+
+            </div>
+        </form>
+        <a data-toggle="modal" data-target="#myModal2">Forgot Password?</a>  
+    </div>
+  
+
+    
+
+    <div class="templatemo-content-widget templatemo-login-widget templatemo-register-widget white-bg">
+        <p>Not a registered user yet? <strong><a href="~/Home/Registration" class="blue-text">Sign up now!</a></strong></p>
+    </div>
+</body>
+</html>
+<script src="~/js/jquery-1.11.2.min.js"></script>  
+<script src="~/bootstrap/bootstrap.min.js"></script>
+<script src="~/bootstrap/jquery.min.js"></script>

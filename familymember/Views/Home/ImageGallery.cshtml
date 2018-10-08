@@ -1,0 +1,80 @@
+﻿
+@{
+    ViewBag.Title = "ImageGallery";
+}
+
+<h2>ImageGallery</h2>
+
+<section class="content">
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="height:185px">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Add Image</h4>
+                </div>
+                <div class="modal-body">
+                    <!-- /.box-header -->
+                    <form role="form" method="post" enctype="multipart/form-data">
+
+                        <!-- text input -->
+                        <div class="form-group">
+                            <label for="exampleInputFile">Image upload</label>
+                            <input type="file" name="IMAGE" id="files">
+                        </div>
+
+                        <!-- text input -->
+                        <!-- text input -->
+                        
+                        <div class="box-footer">
+                            <input type="submit" class="btn btn-success pull-right" value="Add Image" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+ 
+    <!-- Info boxes -->
+    <div class="box">
+        <div class="box-header">         
+            <a data-toggle="modal" data-target="#myModal3" type="button" class="btn btn-primary  display_all hide_me" style="float: right;">Add Image</a>          
+        </div>        
+        <!-- /.box-header -->
+        <div class="box-body">
+            @foreach (var item in ViewBag.img)
+            {  
+                <input type="image" src="~/images/@item.IMAGE" height="300px" width="250px" id="row_@item.Id"/>
+                <a style="display:normal" class="hide_me display_all"  onclick="Delete(@item.Id,'del')"> &nbsp; <i class="fa fa-trash"></i> </a>
+            }
+        </div>
+    </div>
+    <!-- /.row -->
+</section>
+
+<script>
+    function Delete(id,del)
+    {
+        if (confirm("Are you sure Delete this Record?")) {
+            var deletes =
+               {
+                   ID : id, 
+                   image_del : del,
+               }
+            {
+                $.ajax({
+                    url: '/Home/delete/',
+                    data: JSON.stringify(deletes),
+                    type: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        $('#row_' + id).hide();
+                    }
+                });
+            }
+        }
+        return false;
+    }
+</script>

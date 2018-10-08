@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1f276ebfefbb4b9995493d2e8174844b" Name="Diagram1">
+        <EntityTypeShape EntityType="memberModel.tbl_address" Width="1.5" PointX="5.25" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="memberModel.tbl_events" Width="1.5" PointX="5.25" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="memberModel.tbl_groupadmin" Width="1.5" PointX="5.25" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="memberModel.tbl_groupuser" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="memberModel.tbl_images" Width="1.5" PointX="5.25" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="memberModel.tbl_member" Width="1.5" PointX="3" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="memberModel.tbl_member_role" Width="1.5" PointX="5.25" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="memberModel.tbl_notification" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="memberModel.tbl_relationship" Width="1.5" PointX="0.75" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="memberModel.tbl_surname" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="memberModel.tbl_videos" Width="1.5" PointX="5.25" PointY="18.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="memberModel.tbl_village" Width="1.5" PointX="5.25" PointY="21.75" IsExpanded="true" />
+        <AssociationConnector Association="memberModel.FK_tbl_address_ToTable" ManuallyRouted="false" />
+        <AssociationConnector Association="memberModel.FK_tbl_events_ToTable" ManuallyRouted="false" />
+        <AssociationConnector Association="memberModel.FK_tbl_group2_ToTable" ManuallyRouted="false" />
+        <AssociationConnector Association="memberModel.FK_tbl_images_ToTable" ManuallyRouted="false" />
+        <AssociationConnector Association="memberModel.FK_tbl_member_role_ToTable" ManuallyRouted="false" />
+        <AssociationConnector Association="memberModel.FK_tbl_member_ToTable" ManuallyRouted="false" />
+        <AssociationConnector Association="memberModel.FK_tbl_videos_ToTable" ManuallyRouted="false" />
+        <AssociationConnector Association="memberModel.FK_tbl_village_ToTable" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

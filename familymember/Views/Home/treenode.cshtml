@@ -1,0 +1,263 @@
+﻿@model IEnumerable<familymember.Models.tbl_member>
+@{
+    ViewBag.Title = "treenode";
+}
+
+<h2>treenode</h2>
+<style>
+    .loadingp {
+        background-image: url('../../images/bicycle.jpg');
+        width: 15px;
+        display: inline-block;
+    }
+
+    .collapse {
+        width: 15px;
+        background-image: url('../../images/download (1).jpg');
+        background-repeat: no-repeat;
+        background-position: 50px -17px;
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    .collapsing {
+    }
+
+    .expand {
+        width: 15px;
+        background-image: url('../../images/IMG-20170605-WA0002.jpg');
+        background-repeat: no-repeat;
+        background-position: 50px -17px;
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    .treeview ul {
+        font: 14px Arial,Snas-Serif;
+        margin: 0px;
+        padding-left: 20px;
+        list-style: none;
+    }
+
+    .treeview li a {
+        font-weight: bold;
+    }
+
+
+
+    .treeview li a {
+        padding: 4px;
+        font-size: 12px;
+        display: inline-block;
+        text-decoration: none;
+        width: auto;
+    }
+</style>
+<div style="border:1px solid ; border:0px;background-color:#FAFAFA">
+    @{
+        <button type="button" id="1" class="ul-appending ">Expand</button>
+        <div class="treeview">
+            @{                
+                    <ul>    
+                        @foreach(var i  in ViewBag.tree)
+                        {
+                            <li>
+                                <span class="collapse collapsing" data-loading="false" pid="@i.FIRSTNAME">&nbsp;</span>
+                                <span>                                  
+                                    <a href="~/Home/tree">@i.FIRSTNAME</a> 
+                                </span>
+                            </li>
+                        }
+                    </ul>                
+            }
+        </div>
+    }
+</div>
+
+<form name="f1" method="post" action="">
+    <div id="container">
+        <ul>            
+            @*<li class="margin_left ">
+                 <div class="romvebtn">
+                    <button type="button" id="2" class="remove ">Remove</button>
+                </div>
+                <button type="button" id="1" class="ul-appending ">Expand</button>
+            </li>*@
+            @*<li class="tree-lastsib">
+               
+                <div class="romvebtn">
+                    <button type="button" id="22" class="remove ">Remove</button>
+                </div>
+                <button type="button" id="23" class="ul-appending tt">Expand</button>
+            </li>*@
+        </ul>
+    </div>
+</form>
+
+<script>
+    var nd = 1;
+
+    $('body').on('click', 'button.ul-appending', function (e) {
+        $(this).prev('div.romvebtn').show();
+
+        $(this).hide();
+        var idd = e.target.id;
+        $(this).parent().append(
+        //$('<ul>').addClass('newul').append($('<li>').append($('<span class="tree-connector">No</span><input type="text"  value="Y_' + idd + '_1" name="q_' + idd + '_1" id="Y_' + idd + '_1"><div class="romvebtn"><button type="button" id="2" class="remove ">Remove</button></div>'), $('<button type="button"  id="' + idd + '_1">').addClass('ul-appending').text("Expand")),
+
+        $('<ul>').addClass('newul').append($('<li>').append($('<span class="tree-connector"></span><<div class="romvebtn"><button type="button" id="2" class="remove ">Remove</button></div>'), $('<button type="button"  id="' + idd + '_1">').addClass('ul-appending').text("Expand")),
+        $('<li class="tree-lastsib">').append($('<span class="tree-connector">Yes</span><input type="text"   value="N_' + idd + '_2" name="q_' + idd + '_2" id="N_' + idd + '_2"><div class="romvebtn"><button type="button" id="2" class="remove ">Remove</button></div>'), $('<button type="button" id="' + idd + '_2">').addClass('ul-appending').text("Expand"))));
+        $('body').on('click', 'button.remove', function () {
+            $(this).parent('.romvebtn').parent('li').children('ul').remove();
+            $(this).parent('.romvebtn').next('button').show();
+            $(this).parent('.romvebtn').hide();
+
+        });
+    });
+</script>      
+
+
+<style>
+  
+.margin_top2px{ margin-top:20px;}
+ul li button{  display: block;
+    margin-bottom: 0;
+    margin-left: 32px;}
+.full_container{ float:left; width:100%;}
+input[type="text"]{ width:300px; padding:6px; margin-top:10px; margin-bottom:6px;}
+.margin_ng{ margin-left:-4px;}
+ul {
+margin-left:0px;
+list-style:none;
+ padding-left:40px; margin-left:-20px;
+	padding: 0 0 0 16px;
+	margin: 0;
+}
+ li {  
+    margin: 0;
+    padding: 0px 0 10px; border-left:1px solid #d9d9d9;}
+
+ul li.tree-lastsib
+{ border:none !important;
+}
+span.tree-connector{
+	width: 30px;
+	height: 26px;
+	display: inline-block; /* Required to make a span sizeable */
+	vertical-align: top;
+	text-align:center;
+	border-bottom:1px solid #d9d9d9;
+	
+}
+li.tree-lastsib > span.tree-connector{ border-left:1px solid #d9d9d9;}
+.buttons input[type="submit"], button {
+   background: none repeat scroll 0 0 #047BA1;
+    border: medium none !important;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-size: 12px;
+    padding: 3px 7px;
+}
+.buttons input[type="submit"]:hover, button:hover {
+    background: none repeat scroll 0 0 #118BBA;
+}
+
+.margin_top_o{ margin-top: 0!important}
+.romvebtn{ display:none;}
+.romvebtn{  border-left: 1px solid #D9D9D9;
+    margin-left: 16px;
+    margin-top: -20px;
+    padding-top: 20px;}
+.romvebtn .buttons input[type="submit"], .romvebtn button{ background:#6F0B0B; margin-left:10px;}
+</style>
+
+@*<div class="col-sm-4">
+    <h2>Default</h2>
+    <div id="treeview1" class="treeview">
+        <ul class="list-group">
+            <li class="list-group-item node-treeview1" data-nodeid="0" style="color:undefined;background-color:undefined;"><span class="icon expand-icon glyphicon glyphicon-minus"></span><span class="icon node-icon"></span>Parent 1</li>
+            <li class="list-group-item node-treeview1" data-nodeid="1" style="color:undefined;background-color:undefined;">
+                <span class="indent"></span>
+                <span class="icon expand-icon glyphicon glyphicon-minus"></span>
+                <span class="icon node-icon"></span>Child 1
+            </li>
+            <li class="list-group-item node-treeview1" data-nodeid="2" style="color:undefined;background-color:undefined;">
+                <span class="indent"></span>
+                <span class="indent"></span><span class="icon glyphicon">
+                </span><span class="icon node-icon"></span>Grandchild 1
+            </li>
+            <li class="list-group-item node-treeview1" data-nodeid="3" style="color:undefined;background-color:undefined;"><span class="indent"></span><span class="indent"></span><span class="icon glyphicon"></span><span class="icon node-icon"></span>Grandchild 2</li>
+            <li class="list-group-item node-treeview1" data-nodeid="4" style="color:undefined;background-color:undefined;"><span class="indent"></span><span class="icon glyphicon"></span><span class="icon node-icon"></span>Child 2</li>
+            <li class="list-group-item node-treeview1" data-nodeid="5" style="color:undefined;background-color:undefined;"><span class="icon glyphicon"></span><span class="icon node-icon"></span>Parent 2</li>
+            <li class="list-group-item node-treeview1" data-nodeid="6" style="color:undefined;background-color:undefined;"><span class="icon glyphicon"></span><span class="icon node-icon"></span>Parent 3</li>
+            <li class="list-group-item node-treeview1" data-nodeid="7" style="color:undefined;background-color:undefined;"><span class="icon glyphicon"></span><span class="icon node-icon"></span>Parent 4</li>
+            <li class="list-group-item node-treeview1" data-nodeid="8" style="color:undefined;background-color:undefined;"><span class="icon glyphicon"></span><span class="icon node-icon"></span>Parent 5</li>
+        </ul>
+    </div>
+</div>*@
+
+@*<script src="~/bootstrap/js/bootstrap-treeview.min.js"></script>*@
+
+@*<script src="~/bootstrap/public/js/bootstrap-treeview.js"></script>
+<script src="~/bootstrap/js/bootstrap-treeview.min.js"></script>*@
+    
+<script>
+    $(document).ready(function (){
+        $(".collapsing").live("click",function (e) {ss
+        e.preventDefault();
+
+            var this1=$(this);
+            var data={
+                pid: $(this).attr('pid')
+            };
+        
+            var isLoaded=$(this1).attr('data-loading');
+            if(isLoaded == "false")
+            {
+                $(this1).addClass("loadingp");
+                $(this1).removeClass("collapse");
+            
+                $.ajax({
+                    url:"/Home/Getsubmenu",
+                    type:"GET",
+                    data:data,
+                    dataType:"json",
+                    success:function(d){
+                        $(this1).removeClass("loadingp");
+
+                        if(d.length > 0)
+                        {
+                            var $ul = $("<ul></ul>");
+                            $.each(d, function(i,ele){
+                                $ul.append(
+                                    $("<li></li>").append(
+                                     "<span class='collapse collapsible' data-loaded='false' pid='"+ele.FIRSTNAME+"'>&nbsp;</span>" +
+                                     "<span><a href='"+ele.FIRSTNAME+"'>"+ele.FIRSTNAME+"</a></span>"
+                                    )
+                                    )
+                            });
+                            $(this1).parent().append($ul);
+                            $(this1).addClass('collapse');
+                            $(this1).toggleClass('collapse');
+                            $(this1).closest('li').children('ul').slideDown;
+                        }
+                        else{
+                            $(this1).css({'display':'inline-block','width':'15px'});
+                        }
+
+                        $(this1).attr('data-loaded',true);
+                    
+                    },
+                    error:function(){
+                        alert("Error!");
+                    }
+                });
+            }        
+            else{
+                $(this1).toggleClass("collapse expand");
+                $(this1).closest('li').children('ul').slideDown();
+            }
+        });
+        
+    });
+</script>

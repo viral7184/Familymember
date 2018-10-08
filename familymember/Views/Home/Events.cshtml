@@ -1,0 +1,252 @@
+﻿
+@{
+    ViewBag.Title = "Events";
+}
+
+
+<section class="content">
+   
+    <!-- Modal -->
+    <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="height:415px">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Add Event Details</h4>
+                </div>
+                <div class="modal-body">
+                    <!-- /.box-header -->
+                    <form role="form" method="post" enctype="multipart/form-data">
+
+                        <div class="form-group">
+                            <label>Member Name<span class="error"> * </span></label>
+                            <select name="MEMBER_ID" class="form-control select2-container select2-container--default" dir="ltr" style="width: 100%;">
+                                @foreach (var item in ViewBag.member)
+                                {
+                                    <option value="@item.Id">@item.FIRSTNAME</option>
+                                }
+                            </select>
+                        </div>
+
+                        <!-- text input -->
+                        <div class="form-group ">
+                            <label>EventName<span class="error"> * </span></label>
+                            <input type="text" name="EVENTNAME" required class="form-control" placeholder="Enter Event Name">
+                            <!-- <span class="help-block error">* User Name Already Exist</span> -->
+                        </div>
+                        <!-- text input -->
+                      
+                        <!-- text input -->
+                     
+                        <div class="form-group ">
+                            <label>Event Date</label>
+                            <div class="input-group date">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                <input type="text" name="EVENTDATE" class="form-control pull-right" id="datepicker2">
+                            </div>
+                            <!-- <span class="help-block error">* User Name Already Exist</span> -->
+                        </div>                   
+                       
+                        <div class="form-group ">
+                            <label>Created By<span class="error"> * </span></label>
+                            <input type="text" name="CREATED_BY" required class="form-control" placeholder="Enter Created by">
+                            <!-- <span class="help-block error">* User Name Already Exist</span> -->
+                        </div>
+                      
+                        <div class="box-footer">
+                            <input type="submit" class="btn btn-success pull-right" value="Add Event Details" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="height:415px">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Edit Event Details</h4>
+                </div>
+                <div class="modal-body">
+                    <!-- /.box-header -->
+                    <form role="form" method="post" enctype="multipart/form-data">
+
+                        <div class="form-group">
+                            <label>Member Name<span class="error"> * </span></label>
+                            <select name="MEMBER_ID" id="MEMBER_ID_" class="form-control select2-container select2-container--default" dir="ltr" style="width: 100%;">
+                                @foreach (var item in ViewBag.member)
+                                {
+                                    <option value="@item.Id">@item.FIRSTNAME</option>
+                                }
+                            </select>
+                        </div>
+
+                        <!-- text input -->
+                        <div class="form-group ">
+                            <label>EventName<span class="error"> * </span></label>
+                            <input type="text" name="EVENTNAME" id="EVENTNAME" required class="form-control" placeholder="Enter Event Name">
+                            <!-- <span class="help-block error">* User Name Already Exist</span> -->
+                        </div>
+                        <!-- text input -->
+                        <!-- text input -->
+
+                        <div class="form-group ">
+                            <label>Event Date</label>
+                            <div class="input-group date">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                <input type="text" name="EVENTDATE"  class="form-control pull-right" id="datepicker3">
+                            </div>
+                            <!-- <span class="help-block error">* User Name Already Exist</span> -->
+                        </div>
+
+                        <div class="form-group ">
+                            <label>Created By<span class="error"> * </span></label>
+                            <input type="text" name="CREATED_BY" id="CREATED_BY" required class="form-control" placeholder="Enter Created by">
+                            <!-- <span class="help-block error">* User Name Already Exist</span> -->
+                        </div>
+
+                        <div class="box-footer">
+                            <input type="hidden" id="hdnid3" name="Id" />
+                            <input type="submit" class="btn btn-success pull-right" value="Update Event" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Info boxes -->
+    <div class="box">
+        <div class="box-header">
+            <h3 class="box-title">Events</h3>
+            
+            <a data-toggle="modal" data-target="#myModal3" type="button" class="btn btn-primary display_all hide_me" style="float: right;">Add New Events</a>
+              
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+            <table id="fileTable" class="table table-bordered dataTable" role="grid" aria-describedby="fileTable_info">
+                <thead>
+                    <tr>
+                        <th>SR_No</th>
+                        <th>Member Name</th>  
+                        <th>EventName</th>
+                        <th>EventDate</th>
+                        <th>CreatedBy</th>                        
+                        <th class="hide_me display_all">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{int i = 1;}
+                    @foreach (var item in ViewBag.eve)
+                    {
+                        <tr id="row_@item.Id">
+                            <td>
+                                <span>@i</span>     
+                            </td>
+
+                            <td>
+                                <a href="~/Home/Mainmember/@item.tbl_member.Id"> @item.tbl_member.FIRSTNAME</a>
+                                @*@item.tbl_member.FIRSTNAME*@
+                                <span class="hidden" id="MEMBER_ID_@item.Id">@item.MEMBER_ID</span>
+                            </td>
+
+                            <td id="eventname_@item.Id">
+                                 @item.EVENTNAME
+                            </td>
+                                                       
+                            <td id="eventdate_@item.Id">
+                                @*@item.EVENTDATE*@
+                                @if (item.EVENTDATE != null)
+                                {
+                                    @item.EVENTDATE.ToShortDateString()
+                                }
+                                else
+                                {
+                                    @item.EVENTDATE
+                                }
+                            </td>
+
+                            <td id="created_@item.Id">
+                                @item.CREATED_BY
+                            </td>
+
+                            <td class="hide_me display_all">
+                                <a onclick="OpenDialog(@item.Id)" style="display:inline" data-toggle="modal" data-target="#myModal1" type="button"> <i class="fa fa-edit"></i></a>
+                                <a style="display:inline"  onclick="Delete(@item.Id,'del')"> &nbsp; <i class="fa fa-trash"></i> </a>
+                            </td>
+
+                        </tr>
+                        i++;
+                    }
+                </tbody>
+
+
+            </table>
+        </div>
+    </div>
+    <!-- /.row -->
+</section>
+
+
+<script>
+    function Delete(id,del)
+    {
+        if (confirm("Are you sure Delete this Record?")) {
+            var deletes =
+               {
+                   ID : id,
+                   a_del : del,
+               }
+            {
+                $.ajax({
+                    url: '/Home/delete/',
+                    data: JSON.stringify(deletes),
+                    type: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        $('#row_' + id).hide();
+                    }
+                });
+            }
+        }
+        return false;
+    }
+
+</script>
+
+
+<script>
+    function OpenDialog(id) {
+        var Add =
+                   {
+                       ID : id,
+                   }
+        var EventDate = $('#eventdate_' + id).text().trim();
+
+        $('#datepicker3').val(EventDate);
+
+
+            $.ajax({
+                url: '/Home/getevent/' + id,
+                type: 'GET',
+
+                success: function (data) {
+
+                    $('#hdnid3').val(data.data.Id);
+                    $('#MEMBER_ID_').val(data.data.MEMBER_ID)
+                    $('#EVENTNAME').val(data.data.EVENTNAME);
+                    $('#datepicker2').val(data.data.datepicker2);
+                    $('#CREATED_BY').val(data.data.CREATED_BY);
+                  
+                }
+            });
+        }
+</script>

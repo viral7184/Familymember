@@ -1,0 +1,150 @@
+﻿
+@{
+    ViewBag.Title = "member_role";
+}
+<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="height:270px">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="myModalLabel">Edit Member Role Details</h4>
+            </div>
+            <div class="modal-body">
+                <!-- /.box-header -->
+                <form role="form" method="post">
+
+                    <!-- text input -->
+                    <div class="form-group">
+                        <label>Member Name<span class=" error"> * </span></label>
+                        <select name="MEMBER_ID" required id="MEMBER_ID3" class="form-control select2-container select2-container--default" dir="ltr" style="width: 100%;">
+
+                            @foreach (var item in ViewBag.memberlist)
+                            {
+                                <option value="@item.Id">@item.FIRSTNAME</option>
+                            }
+                        </select>
+                    </div>
+
+                    <!-- text input -->
+                    <!-- text input -->
+                    <div class="form-group ">
+                        <label>Member_role<span class="error"> * </span></label>
+                        <select name="MEMBER_ROLE" required id="MEMBER_ROLE" class="form-control select2-container select2-container--default" dir="ltr" style="width: 100%;">
+
+                            <option value="MainMember">MainMember</option>
+                            <option value="SubMember1">SubMember1</option>
+                            <option value="SubMember2">SubMember2 </option>
+                        </select>
+                        <!-- <span class="help-block error">* User Name Already Exist</span> -->
+                    </div>
+                    <div class="box-footer">
+                        <input type="hidden" id="hdnid2" name="Id" />
+                        <button type="submit" class="btn btn-success pull-right">Update Member Role</button>
+                    </div>
+                </form>
+                <!-- /.box-body -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="box">
+    <div class="box-header">
+        <h3 class="box-title">Member Role</h3>
+        @*<a href="" data-toggle="modal" data-target="#myModal" type="button" class="btn btn-primary" style="float: right;">Add Employee Role</a>*@
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body" style="overflow-x: scroll;">
+
+        <table id="fileTable" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="fileTable_info">
+            <thead>
+                <tr>
+                    <th>SR_No</th>
+                    <th>Name</th>
+                    <th>Role</th>
+                    <th class="hide_me display_all">Action</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @{int i = 1;}
+                @foreach (var item in ViewBag.member_role)
+                {
+                    <tr>
+                        <td>
+                            <span>@i</span>
+                        </td>
+                        <td id="EMPID_@item.Id">
+
+                            @foreach (var data in ViewBag.memberlist)
+                            {
+                                if (item.MEMBER_ID == data.Id)
+                                {
+                                    @data.FIRSTNAME
+                                }
+                            }
+                        </td>
+                        <td id="EMPROLE_@item.Id">@item.MEMBER_ROLE</td>
+                        <td class="hide_me display_all">
+                            <a href="" onclick="OpenDialog(@item.tbl_member.Id)" data-toggle="modal" data-target="#myModal1" type="button">&nbsp; <i class="fa fa-edit"></i></a>
+                            <a style="display:inline" onclick="Delete(@item.Id,'del')"> &nbsp; <i class="fa fa-trash"></i> </a>
+                        </td>
+                    </tr>
+                    i++;
+                }
+            </tbody>
+
+        </table>
+    </div>
+</div>
+@*<script src="~/bootstrap/jquery.min.js"></script>*@
+<script>
+    function OpenDialog(id) {
+        var emp =
+                   {
+                       ID : id,
+                   }
+
+            $.ajax({
+                url: '/Home/getmemberrole/' + id,
+                type: 'GET',
+
+                success: function (data) {
+                    $('#hdnid2').val(data.data.Id);
+                    $('#MEMBER_ID3').val(data.data.MEMBER_ID);     
+
+                    var member_role= data.data.MEMBER_ROLE.split('-');
+                    //$('#MEMBER_ROLE option[value=' + emp_role[0] + ']').attr("selected", "selected");
+                    $('#MEMBER_ROLE option[value="' + member_role[0] + '"]').prop("selected", "selected").change();
+                }
+            });
+        }
+</script>
+
+<script>
+    function Delete(id,del)
+    {
+        if (confirm("Are you sure Delete this Record?")) {
+            var deletes =
+               {
+                   ID : id,
+                   memrole_del : del,
+               }
+            {
+                $.ajax({
+                    url: '/Home/delete/',
+                    data: JSON.stringify(deletes),
+                    type: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        $('#row_' + id).hide();
+                    }
+                });
+            }
+        }
+        return false;
+    }
+
+</script>

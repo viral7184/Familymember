@@ -1,0 +1,147 @@
+﻿
+@{
+    ViewBag.Title = "Registration";
+}
+
+<h2>Registration Form</h2>
+        
+        
+<form role="form" method="post">
+    <div class="form-group ">
+        <div class="row">
+            <div class="col-xs-6">
+                <label>Firstname</label>
+                <input type="text" name="FIRSTNAME" required class="form-control" placeholder="Enter Firstname">
+            </div>
+            <div class="col-xs-6">
+                <label>Surname</label>
+                <input type="text" name="SURNAME" required class="form-control" placeholder="Enter Surname">
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group ">
+        <div class="row">         
+                <div class="col-xs-6">
+                    <div class="col-lg-8">
+                        <label>Email</label>
+                        <input type="email"  name="EMAIL" id="EMAIL2" required class="form-control" placeholder="Enter Email">
+                      <input type="button" onclick="otp()" value="Verify" />
+                    </div>
+                    <div class="col-lg-4">
+                        <label>OTP</label>
+                        <input type="text" name="OTP" required class="form-control" placeholder="Enter OTP">
+                        @if (Session["otpnumber"] != null)
+                        {
+                            <div style="color:red">  @Session["otpnumber"]</div>
+                        }
+                    </div>
+                </div>
+         
+            <div class="col-xs-6">
+                <label>Password</label>
+                <input type="password" name="PASSWORD" required class="form-control" placeholder="Enter Password">
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="row">
+            <div class="col-xs-6">
+                <label>Mobile1</label>
+                <input type="text" name="MOBILE1" id="phone1" maxlength="10" OnClientClick="javascript:return numbersonly();" onkeypress="phoneno()" required  class="form-control" placeholder="Enter Mobile">
+            </div>
+            <div class="col-xs-6">
+                <label>Mobile2</label>
+                <input type="text" name="MOBILE2" id="phone2" maxlength="14" onkeypress="phoneno()"  class="form-control" placeholder="Enter Mobile2">
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="row">
+            <div class="col-xs-6">
+                <label>Date of Birth</label>
+                <input type="text" name="DOB" class="form-control" id="datepicker3">
+            </div>
+
+            <div class="col-xs-6">
+                <label>BloodGroup</label>
+                <input type="text" name="BLOODGROUP"  class="form-control" placeholder="Enter Bloodgroup        ">
+            </div>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label for="exampleInputFile">Image upload</label>
+        <input type="file" name="IMAGE" id="files">
+    </div>
+
+    <div class="form-group ">
+        <label>Education<span class="error">  </span></label>
+        <input type="text" style="width:48%" name="EDUCATION"  class="form-control" placeholder="Enter Education">
+        <!-- <span class="help-block error">* User Name Already Exist</span> -->
+    </div>
+
+    <div class="box-footer">
+        <input type="submit" class="btn btn-success pull-left" value="Sign Up" />
+    </div>
+</form>
+@*<script>
+    function Email()
+    {
+        var email = $('#EMAIL').val();           
+            {
+                $.ajax({
+                    url: '/Home/OTP/',
+                    data: { 'email': email },
+                    type: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                       
+                    }
+                });
+            
+        }
+        return false;
+    }
+</script>*@
+
+<script>
+    function otp() {    
+            var email = $('#EMAIL2').val();          
+
+            $.ajax({
+                url: '/Home/OTP/',
+                data: { 'email': email},
+                type: "post",
+                cache: false,
+                success: function (savingStatus) {
+                    //$('#myModalLabel').hide();
+
+                    alert("OTP Successfully sent");
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    $('#lblCommentsNotification').text("Error encountered while changing your password.");
+                }
+            });
+        
+       
+    };
+
+</script>
+
+<script>
+           function phoneno(){
+               $('#phone1,#phone2,#MOBILE1,#MOBILE2').keypress(function(e) {
+                var a = [];
+                var k = e.which;
+                for (i = 48; i < 58; i++)
+                    a.push(i);
+
+                if (!(a.indexOf(k)>=0))
+                    e.preventDefault();
+            });
+           }
+</script>

@@ -1,0 +1,204 @@
+﻿
+@{
+    ViewBag.Title = "groupuser";
+}
+
+<h2>groups</h2>
+
+
+<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="height:415px">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="myModalLabel">Edit Group User</h4>
+            </div>
+            <div class="modal-body">
+                <!-- /.box-header -->
+                <form role="form" method="post" action="~/Home/groupuseredit" enctype="multipart/form-data">
+                    <!-- text input -->
+                    <div class="form-group ">
+                        <label>GroupName<span class="error"> * </span></label>
+                        <input type="text" name="GROUP_NAME"  id="GROUP_NAME2" required class="form-control" placeholder="Enter Group  Name">
+                        <!-- <span class="help-block error">* User Name Already Exist</span> -->
+                    </div>
+
+                    <div class="col-md-4">
+                        <select name="MEMBER_NAME" id="MEMBER_NAME2" multiple="multiple" style="height:100px;width:100px">
+                            <option value="0" >Select Member</option>
+                            @if (ViewBag.memlist != null)
+                            {                               
+                                foreach (var data in ViewBag.memlist)
+                                {
+                                   <option value="@data.FIRSTNAME">@data.FIRSTNAME</option>                                    
+                                }                                
+                            }
+                        </select>
+                    </div>
+
+
+                    @*<div class="form-group">
+                        <label>Member Name<span class="error"> * </span></label>
+                        <select name="MEMBER_NAME" id="MEMBER_NAME2" class="form-control select2-container select2-container--default" dir="ltr" style="width: 100%;">
+                            @foreach (var item in ViewBag.group3)
+                            {
+                                <option value="@item.Id">@item.MEMBER_NAME</option>
+                            }
+                        </select>
+                    </div>*@
+
+                    <div class="box-footer">
+                        <input type="hidden" id="hdnid5" name="Id" />
+                        <input type="submit" class="btn btn-success pull-right" value="Update Groups" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<table id="fileTable" class="table table-bordered  dataTable" role="grid" aria-describedby="fileTable_info">
+
+    <thead>
+        <tr>
+            <th>SR_No</th>
+            <th>GroupName</th>
+            <th>MemberName</th>
+            <th>Add User</th>
+            <th>User Added Date</th>
+            @*<th>IsNotify</th>*@
+            <th class="hide_me display_all">Action</th>
+        </tr>
+    </thead>
+
+    
+    <tbody>
+        @{int i = 1;}
+        @foreach (var item in ViewBag.group3)
+        {
+            <tr id="row_@item.Id">
+                @*  *@
+                <td>
+                    <span>@i</span>
+                    <span class="hidden" id="groupid_@item.Id"></span>
+                </td>
+                <td id="groupname_@item.Id">
+                    @item.GROUP_NAME
+                </td>
+
+                <td>
+                    @item.MEMBER_NAME
+                </td>
+
+                <td>
+                    @item.ISADMIN
+                    <a onclick="OpenDialog(@item.Id)"  style="display:inline" data-toggle="modal" data-target="#myModal1"> &nbsp; <i class="fa fa-user-plus"></i> </a>
+                </td>
+
+                <td id="DOB_@item.Id">
+
+                    @if (item.USER_ADDED_DATE != null)
+                    {
+                        @item.USER_ADDED_DATE.ToShortDateString()
+                    }
+                    else
+                    {
+                        @item.USER_ADDED_DATE
+                    }
+                </td>
+
+                @*<td>
+                    @item.ISNOTIFY
+                </td>*@
+
+                <td class="hide_me display_all">
+                    @*<a data-toggle="modal" data-target="#myModal1" type="button"> <i  onclick="OpenDialog(@item.Id)" class="fa fa-edit"></i></a>*@
+                    <a style="display:inline" onclick="Delete(@item.Id,'del')"> &nbsp; <i class="fa fa-trash"></i> </a>
+                </td>
+            </tr>
+            i++;
+        }
+    </tbody>
+</table>
+
+
+<script>
+    function Delete(id, del) {
+        if (confirm("Are you sure Delete this Record?")) {
+            var deletes =
+               {
+                   ID: id,
+                   group_del: del,
+               }
+            {
+                $.ajax({
+                    url: '/Home/delete/',
+                    data: JSON.stringify(deletes),
+                    type: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        $('#row_' + id).hide();
+                    }
+                });
+            }
+        }
+        return false;
+    }
+
+</script>
+
+@*<script>
+    function OpenDialog(id) {
+        var i = 0;
+        var Add =
+                   {
+                       ID : id,
+                   }
+   
+        var Gid = $('#groupid_' + id).text();
+
+        $('#hdnid5').val(id);
+        var groupname = $('#groupname_' + id).text().trim();
+        $('#GROUP_NAME2').val(groupname);
+
+            $.ajax({
+                url: '/Home/loadmemlist/' + id,
+                type: 'GET',
+                dataType: "JSON",
+                success: function (data) {
+                    $("#MEMBER_NAME2").empty();
+                    $.each(data, function (index, values) {
+                    $.each(values, function (index, value) {
+                        $('#MEMBER_NAME2').append('<option value="' + value.MEMBERLIST + '">' + value.MEMBERLIST + '</option>');
+                        i++;
+                    });
+                    });
+                 
+                }
+            });
+        }
+</script>*@
+
+@*<script>
+    function edit(id) {
+        var Add =
+                   {
+                       ID : id,
+                   }
+
+            $.ajax({
+                url: '/Home/edit/' + id,
+                type: 'GET',
+
+                success: function (data) {
+
+                    $('#hdnid3').val(data.data.Id);
+                    $('#GROUP_NAME2').val(data.data.GROUP_NAME)
+                    $('#MEMBER_NAME2').val(data.data.MEMBER_NAME);
+
+
+                }
+            });
+        }
+</script>*@

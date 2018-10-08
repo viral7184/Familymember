@@ -1,0 +1,91 @@
+﻿
+@{
+    ViewBag.Title = "creategroup";
+}
+
+<h2>Groups</h2>
+
+<table id="fileTable" class="table table-bordered  dataTable" role="grid" aria-describedby="fileTable_info">
+
+    <thead>
+        <tr>
+            <th>SR_No</th>
+            <th>GroupName</th>
+            <th>CreatedBy</th>
+            <th>Members</th>
+            <th>Created Date</th>
+            <th class="hide_me display_all">Action</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @{int i = 1;}
+        @foreach (var item in ViewBag.group)
+        {
+            <tr id="row_@item.Id">
+
+                <td>
+                    <span>@i</span>
+                </td>
+                <td>
+                    @item.GROUP_NAME
+                </td>
+
+                <td>
+                    @item.tbl_member.FIRSTNAME
+                </td>
+
+                <td>
+                    @item.MEMBER
+                </td>
+
+                @*<td>
+                    @item.MEMBER
+                </td>*@
+                <td id="DOB_@item.Id">
+
+                    @if (item.CREATED_DATE != null)
+                    {
+                        @item.CREATED_DATE.ToShortDateString()
+                    }
+                    else
+                    {
+                        @item.CREATED_DATE
+                    }
+                </td>
+
+                <td class="hide_me display_all">
+                    @*<a onclick="OpenDialog(@item.Id)" data-toggle="modal" data-target="#myModal1" type="button"> <i class="fa fa-edit"></i></a>*@
+                    <a style="display:inline" onclick="Delete(@item.Id,'del')"> &nbsp; <i class="fa fa-trash"></i> </a>                   
+                </td>
+
+            </tr>
+            i++;
+        }
+    </tbody>
+</table>
+
+@*<script>
+    function Delete(id, del) {
+        if (confirm("Are you sure Delete this Record?")) {
+            var deletes =
+               {
+                   ID: id,
+                   group_del: del,
+               }
+            {
+                $.ajax({
+                    url: '/Home/delete/',
+                    data: JSON.stringify(deletes),
+                    type: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        $('#row_' + id).hide();
+                    }
+                });
+            }
+        }
+        return false;
+    }
+
+</script>*@

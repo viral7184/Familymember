@@ -1,0 +1,83 @@
+﻿
+@{
+    ViewBag.Title = "VideoGallery";
+}
+
+<section class="container col-sm-12">
+    <div class="col-sm-8"><h2>VideoGallery</h2></div>
+    <div class="col-sm-4 text-center">
+@if (Session["roll"] != null)
+{
+        <a data-toggle="modal" data-target="#myModal3" type="button" class="btn btn-primary  display_all" style="float: right;">Add Video</a>
+}</div>
+</section>
+<section class="content">
+    <!-- Modal -->
+    <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="height:185px">
+                <div class="modal-header">
+                    <button type="button" class="close " data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Add Video</h4>
+                </div>
+                <div class="modal-body">
+                    <!-- /.box-header -->
+                    <form role="form" method="post" enctype="multipart/form-data">
+                        <!-- text input -->
+                        <div class="form-group">
+                            <label for="exampleInputFile">Video upload</label>
+                            <input type="file" name="VIDEO" id="files">
+                        </div>
+                        <!-- text input -->
+                        <!-- text input -->
+
+                        <div class="box-footer">
+                            <input type="submit" class="btn btn-success pull-right" value="Add Video" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="box">         
+        <!-- /.box-header -->
+        <div class="box-body">
+            @foreach (var item in ViewBag.video)
+            {
+                <video width="450" height="200" controls id="row_@item.Id">
+                    <source src="~/video/@item.VIDEO" type="video/mp4">
+                </video>
+                <a style="display:normal" class="hide_me display_all" onclick="Delete(@item.Id,'del')"> &nbsp; <i class="fa fa-trash">Delete</i> </a>
+            }        
+        </div>
+    </div>
+    <!-- /.row -->
+</section>
+
+<script>
+    function Delete(id,del)
+    {
+        if (confirm("Are you sure Delete this Record?")) {
+            var deletes =
+               {
+                   ID : id,
+                   video_del : del,
+               }
+            {
+                $.ajax({
+                    url: '/Home/delete/',
+                    data: JSON.stringify(deletes),
+                    type: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        $('#row_' + id).hide();
+                    }
+                });
+            }
+        }
+        return false;
+    }
+
+</script>

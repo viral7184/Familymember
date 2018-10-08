@@ -1,0 +1,224 @@
+﻿
+@*@model IEnumerable<familymember.Models.tbl_member>*@
+
+@model familymember.Models.tbl_member
+@{
+    ViewBag.Title = "profile";
+}
+
+<section class="content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="box">
+                <div class="box-body box-detail">                  
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6" style="padding-left:40px">
+                            <dl class="dl-horizontal">
+                                <ul class="_6_7 clearfix" data-referrer="timeline_light_nav_top" id="u_jsonp_2_7">
+                                    <li><a class="_6-6 _6-7" data-tab-key="timeline" href="">Timeline<span class="_513x"></span></a></li>
+                                    <li><a class="_6-6" data-tab-key="about" href="">About<span class="_513x"></span></a></li>
+                                    <li><a class="_6-6" data-tab-key="friends" href="">Friends<span class="_gs6">376</span><span class="_513x"></span></a></li>
+                                    <li><a class="_6-6" data-tab-key="photos" href="">Photos<span class="_513x"></span></a></li>
+                                    <li><div class="_6a uiPopover _6-6 _9rx _5v-0" id="u_jsonp_2_8"><a class="_9ry _p" href="#" aria-haspopup="true" aria-expanded="false" rel="toggle" role="button" id="u_jsonp_2_9" aria-controls="u_2b_0">More<i class="_bxy img sp_X18_otUoaUd_1_5x sx_5f6f61"></i></a></div></li>
+                                </ul>
+                                <dt>
+
+                                </dt>
+
+                                <dl>
+                                    <img class="img-responsive" style="height:175px;width:200px"  src="~/Images/@Model.IMAGE" />
+                               </dl>
+
+                                <dt>
+                                    Firstname:
+                                </dt>
+
+                                <dl>
+                                    @if (Model.FIRSTNAME == null)
+                                    {
+                                        <span>-</span>
+                                    }    @Html.DisplayFor(model => model.FIRSTNAME)
+                                </dl>
+
+                                <dt>
+                                    Surname:
+                                </dt>
+
+                                <dl>
+                                    @if (Model.SURNAME == null)
+                                    {
+                                        <span>-</span>
+                                    }
+                                    @Html.DisplayFor(model => model.SURNAME)
+                                </dl>
+
+                                <dt>
+                                    Email:  
+                                </dt>
+                                <dl>
+                                    @if (Model.EMAIL == null)
+                                    {
+                                        <span>-</span>
+                                    }
+                                    @Html.DisplayFor(model => model.EMAIL)
+                                </dl>
+
+                                <dt>
+                                    MOBILE1:    
+                                </dt>
+
+                                <dl>
+                                    @if (Model.MOBILE1 == null)
+                                    {
+                                        <span>-</span>
+                                    }
+                                    @Html.DisplayFor(model => model.MOBILE1)
+                                </dl>
+
+                                <dt>
+                                    MOBILE2:
+                                </dt>
+
+                                <dl>
+                                    @if (Model.MOBILE2 == null)
+                                    {
+                                        <span>-</span>
+                                    }
+                                    @Html.DisplayFor(model => model.MOBILE2)
+                                </dl>
+
+                                <dt>
+                                    DOB :
+                                </dt>
+
+                                <dl id="DOB_@Model.Id">
+                                    @if (Model.DOB == null)
+                                    {
+                                        <span>-</span>
+                                    }
+                                    @Html.DisplayFor(model => model.DOB)
+                                </dl>
+                               
+
+                                <dt>
+                                    BLOODGROUP :
+                                </dt>
+
+                                <dl>
+                                    @if (Model.BLOODGROUP == null)
+                                    {
+                                        <span>-</span>
+                                    }
+
+                                    @Html.DisplayFor(model => model.BLOODGROUP)
+                                </dl>
+
+                                <dt>
+                                    EDUCATION :
+                                </dt>
+
+                                <dl>
+                                    @if (Model.EDUCATION == null)
+                                    {
+                                        <span>-</span>
+                                    }
+                                    @Html.DisplayFor(model => model.EDUCATION)
+                                </dl>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="content">
+    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="height:340px">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Edit Profile </h4>
+                </div>
+                <div class="modal-body">
+                    <!-- /.box-header -->
+                    <form role="form" method="post">
+                        <div class="form-group ">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <label>Firstname</label>
+                                    <input type="text" name="FIRSTNAME" id="FIRSTNAME" required class="form-control" placeholder="Enter Firstname">
+                                </div>
+                                <div class="col-xs-6">
+                                    <label>Email</label>
+                                    <input type="email" name="EMAIL" id="email2" required class="form-control" placeholder="Enter Email">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <label>Mobile1</label>
+                                    <input type="text" name="MOBILE1" id="MOBILE1" maxlength="10" onkeypress="phoneno()" required class="form-control" placeholder="Enter Mobile">
+                                </div>
+                                <div class="col-xs-6">
+                                    <label>Date of Birth</label>
+                                    <input type="text" name="DOB" class="form-control" id="datepicker2">
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group ">
+                            <label>Education<span class="error">  </span></label>
+                            <input type="text" name="EDUCATION" id="EDUCATION" required class="form-control" placeholder="Enter Education">
+                            <!-- <span class="help-block error">* User Name Already Exist</span> -->
+                        </div>
+
+                        <div class="box-footer">
+                            <input type="hidden" id="hdnid3" name="Id" />
+                            <input type="submit" class="btn btn-success pull-right" value="Update Profile" />
+                        </div>
+                    </form>
+                    <!-- /.box-body -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+ 
+</section>
+
+
+<script>
+    function OpenDialog(id) {
+        var Add =
+                   {
+                       ID : id,
+                   }
+
+
+        var Dob = $('#DOB_' + id).text().trim();
+        $('#datepicker2').val(Dob);
+
+
+            $.ajax({
+                url: '/Home/getmember/' + id,
+                type: 'GET',
+
+                success: function (data) {
+
+                    $('#hdnid3').val(data.data.Id);
+                    $('#FIRSTNAME').val(data.data.FIRSTNAME);
+                    $('#email2').val(data.data.EMAIL);
+                    $('#MOBILE1').val(data.data.MOBILE1);
+                 
+                    $('#EDUCATION').val(data.data.EDUCATION);
+                }
+            });
+        }
+</script>

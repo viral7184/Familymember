@@ -1,0 +1,810 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Database1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tbl_address">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MEMBER_ID" Type="int" />
+          <Property Name="STREET" Type="varchar" MaxLength="50" />
+          <Property Name="CITY" Type="varchar" MaxLength="50" />
+          <Property Name="STATE" Type="varchar" MaxLength="50" />
+          <Property Name="PINCODE" Type="varchar" MaxLength="8" />
+          <Property Name="IS_ACTIVE" Type="bit" />
+          <Property Name="IS_DELETED" Type="bit" />
+          <Property Name="LOGIN_BY" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_events">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MEMBER_ID" Type="int" />
+          <Property Name="EVENTNAME" Type="varchar" MaxLength="100" />
+          <Property Name="EVENTDATE" Type="datetime" />
+          <Property Name="CREATED_BY" Type="varchar" MaxLength="20" />
+          <Property Name="IS_ACTIVE" Type="bit" />
+          <Property Name="IS_DELETED" Type="bit" />
+          <Property Name="LOGIN_BY" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_groupadmin">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MEMBER_ID" Type="int" />
+          <Property Name="GROUP_NAME" Type="nvarchar" MaxLength="50" />
+          <Property Name="IS_ACTIVE" Type="bit" />
+          <Property Name="CREATED_DATE" Type="datetime" />
+          <Property Name="IS_DELETE" Type="bit" />
+        </EntityType>
+        <EntityType Name="tbl_groupuser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GROUP_NAME" Type="nvarchar" MaxLength="50" />
+          <Property Name="MEMBER_NAME" Type="nvarchar" MaxLength="50" />
+          <Property Name="ISADMIN" Type="bit" />
+          <Property Name="USER_ADDED_DATE" Type="datetime" />
+          <Property Name="ISNOTIFY" Type="bit" />
+          <Property Name="ISACTIVE" Type="bit" />
+          <Property Name="IS_DELETED" Type="bit" />
+          <Property Name="LOGIN_BY" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_images">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MEMBER_ID" Type="int" />
+          <Property Name="IMAGE" Type="varchar(max)" />
+          <Property Name="IS_ACTIVE" Type="bit" />
+          <Property Name="IS_DELETED" Type="bit" />
+          <Property Name="LOGIN_BY" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_member">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FIRSTNAME" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="SURNAME" Type="varchar" MaxLength="50" />
+          <Property Name="EMAIL" Type="varchar" MaxLength="50" />
+          <Property Name="PASSWORD" Type="varchar" MaxLength="12" />
+          <Property Name="MOBILE1" Type="varchar" MaxLength="12" />
+          <Property Name="MOBILE2" Type="varchar" MaxLength="12" />
+          <Property Name="DOB" Type="datetime" />
+          <Property Name="IMAGE" Type="varchar(max)" />
+          <Property Name="BLOODGROUP" Type="varchar" MaxLength="10" />
+          <Property Name="EDUCATION" Type="varchar" MaxLength="50" />
+          <Property Name="RELATIONSHIP" Type="int" />
+          <Property Name="CREATED_DATE" Type="datetime" />
+          <Property Name="MODIFIED_DATE" Type="datetime" />
+          <Property Name="IS_ACTIVE" Type="bit" />
+          <Property Name="IS_DELETED" Type="bit" />
+          <Property Name="LOGIN_BY" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_member_role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MEMBER_ID" Type="int" />
+          <Property Name="MEMBER_ROLE" Type="varchar" MaxLength="20" />
+          <Property Name="CREATED_DATE" Type="datetime" />
+          <Property Name="MODIFIED_DATE" Type="datetime" />
+          <Property Name="IS_DELETED" Type="bit" />
+          <Property Name="LOGIN_BY" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_notification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GROUP_NAME" Type="nvarchar" MaxLength="50" />
+          <Property Name="MEMBER_NAME" Type="nvarchar" MaxLength="50" />
+          <Property Name="MESSAGE" Type="nvarchar" MaxLength="150" />
+          <Property Name="ADMIN" Type="nvarchar" MaxLength="50" />
+          <Property Name="IS_NOTIFY" Type="bit" />
+          <Property Name="IS_DELETED" Type="bit" />
+          <Property Name="LOGIN_BY" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_relationship">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RELATIONSHIP" Type="varchar" MaxLength="50" />
+          <Property Name="IS_DELETED" Type="bit" />
+          <Property Name="LOGIN_BY" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_surname">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SURNAME" Type="nvarchar" MaxLength="50" />
+          <Property Name="IS_ACTIVE" Type="bit" />
+          <Property Name="IS_DELETED" Type="nchar" MaxLength="10" />
+          <Property Name="LOGIN_BY" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_videos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MEMBER_ID" Type="int" />
+          <Property Name="VIDEO" Type="varchar(max)" />
+          <Property Name="IS_ACTIVE" Type="bit" />
+          <Property Name="IS_DELETED" Type="bit" />
+          <Property Name="LOGIN_BY" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_village">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MEMBER_ID" Type="int" />
+          <Property Name="VILLAGE" Type="varchar" MaxLength="50" />
+          <Property Name="SUBDISTRICT" Type="varchar" MaxLength="50" />
+          <Property Name="DISTRICT" Type="varchar" MaxLength="50" />
+          <Property Name="IS_DELETED" Type="bit" />
+          <Property Name="LOGIN_BY" Type="int" />
+        </EntityType>
+        <Association Name="FK_tbl_address_ToTable">
+          <End Role="tbl_member" Type="Self.tbl_member" Multiplicity="0..1" />
+          <End Role="tbl_address" Type="Self.tbl_address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_member">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbl_address">
+              <PropertyRef Name="MEMBER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_events_ToTable">
+          <End Role="tbl_member" Type="Self.tbl_member" Multiplicity="0..1" />
+          <End Role="tbl_events" Type="Self.tbl_events" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_member">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbl_events">
+              <PropertyRef Name="MEMBER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_group2_ToTable">
+          <End Role="tbl_member" Type="Self.tbl_member" Multiplicity="0..1" />
+          <End Role="tbl_groupadmin" Type="Self.tbl_groupadmin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_member">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbl_groupadmin">
+              <PropertyRef Name="MEMBER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_images_ToTable">
+          <End Role="tbl_member" Type="Self.tbl_member" Multiplicity="0..1" />
+          <End Role="tbl_images" Type="Self.tbl_images" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_member">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbl_images">
+              <PropertyRef Name="MEMBER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_member_role_ToTable">
+          <End Role="tbl_member" Type="Self.tbl_member" Multiplicity="0..1" />
+          <End Role="tbl_member_role" Type="Self.tbl_member_role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_member">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbl_member_role">
+              <PropertyRef Name="MEMBER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_member_ToTable">
+          <End Role="tbl_relationship" Type="Self.tbl_relationship" Multiplicity="0..1" />
+          <End Role="tbl_member" Type="Self.tbl_member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_relationship">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbl_member">
+              <PropertyRef Name="RELATIONSHIP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_videos_ToTable">
+          <End Role="tbl_member" Type="Self.tbl_member" Multiplicity="0..1" />
+          <End Role="tbl_videos" Type="Self.tbl_videos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_member">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbl_videos">
+              <PropertyRef Name="MEMBER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_village_ToTable">
+          <End Role="tbl_member" Type="Self.tbl_member" Multiplicity="0..1" />
+          <End Role="tbl_village" Type="Self.tbl_village" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_member">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbl_village">
+              <PropertyRef Name="MEMBER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Database1ModelStoreContainer">
+          <EntitySet Name="tbl_address" EntityType="Self.tbl_address" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_events" EntityType="Self.tbl_events" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_groupadmin" EntityType="Self.tbl_groupadmin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_groupuser" EntityType="Self.tbl_groupuser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_images" EntityType="Self.tbl_images" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_member" EntityType="Self.tbl_member" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_member_role" EntityType="Self.tbl_member_role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_notification" EntityType="Self.tbl_notification" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_relationship" EntityType="Self.tbl_relationship" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_surname" EntityType="Self.tbl_surname" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_videos" EntityType="Self.tbl_videos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_village" EntityType="Self.tbl_village" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tbl_address_ToTable" Association="Self.FK_tbl_address_ToTable">
+            <End Role="tbl_member" EntitySet="tbl_member" />
+            <End Role="tbl_address" EntitySet="tbl_address" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_events_ToTable" Association="Self.FK_tbl_events_ToTable">
+            <End Role="tbl_member" EntitySet="tbl_member" />
+            <End Role="tbl_events" EntitySet="tbl_events" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_group2_ToTable" Association="Self.FK_tbl_group2_ToTable">
+            <End Role="tbl_member" EntitySet="tbl_member" />
+            <End Role="tbl_groupadmin" EntitySet="tbl_groupadmin" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_images_ToTable" Association="Self.FK_tbl_images_ToTable">
+            <End Role="tbl_member" EntitySet="tbl_member" />
+            <End Role="tbl_images" EntitySet="tbl_images" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_member_role_ToTable" Association="Self.FK_tbl_member_role_ToTable">
+            <End Role="tbl_member" EntitySet="tbl_member" />
+            <End Role="tbl_member_role" EntitySet="tbl_member_role" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_member_ToTable" Association="Self.FK_tbl_member_ToTable">
+            <End Role="tbl_relationship" EntitySet="tbl_relationship" />
+            <End Role="tbl_member" EntitySet="tbl_member" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_videos_ToTable" Association="Self.FK_tbl_videos_ToTable">
+            <End Role="tbl_member" EntitySet="tbl_member" />
+            <End Role="tbl_videos" EntitySet="tbl_videos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_village_ToTable" Association="Self.FK_tbl_village_ToTable">
+            <End Role="tbl_member" EntitySet="tbl_member" />
+            <End Role="tbl_village" EntitySet="tbl_village" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Database1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tbl_address">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MEMBER_ID" Type="Int32" />
+          <Property Name="STREET" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CITY" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="STATE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PINCODE" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="IS_ACTIVE" Type="Boolean" />
+          <Property Name="IS_DELETED" Type="Boolean" />
+          <Property Name="LOGIN_BY" Type="Int32" />
+          <NavigationProperty Name="tbl_member" Relationship="Self.FK_tbl_address_ToTable" FromRole="tbl_address" ToRole="tbl_member" />
+        </EntityType>
+        <EntityType Name="tbl_events">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MEMBER_ID" Type="Int32" />
+          <Property Name="EVENTNAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="EVENTDATE" Type="DateTime" Precision="3" />
+          <Property Name="CREATED_BY" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IS_ACTIVE" Type="Boolean" />
+          <Property Name="IS_DELETED" Type="Boolean" />
+          <Property Name="LOGIN_BY" Type="Int32" />
+          <NavigationProperty Name="tbl_member" Relationship="Self.FK_tbl_events_ToTable" FromRole="tbl_events" ToRole="tbl_member" />
+        </EntityType>
+        <EntityType Name="tbl_groupadmin">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MEMBER_ID" Type="Int32" />
+          <Property Name="GROUP_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IS_ACTIVE" Type="Boolean" />
+          <Property Name="CREATED_DATE" Type="DateTime" Precision="3" />
+          <Property Name="IS_DELETE" Type="Boolean" />
+          <NavigationProperty Name="tbl_member" Relationship="Self.FK_tbl_group2_ToTable" FromRole="tbl_groupadmin" ToRole="tbl_member" />
+        </EntityType>
+        <EntityType Name="tbl_groupuser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GROUP_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MEMBER_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ISADMIN" Type="Boolean" />
+          <Property Name="USER_ADDED_DATE" Type="DateTime" Precision="3" />
+          <Property Name="ISNOTIFY" Type="Boolean" />
+          <Property Name="ISACTIVE" Type="Boolean" />
+          <Property Name="IS_DELETED" Type="Boolean" />
+          <Property Name="LOGIN_BY" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tbl_images">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MEMBER_ID" Type="Int32" />
+          <Property Name="IMAGE" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IS_ACTIVE" Type="Boolean" />
+          <Property Name="IS_DELETED" Type="Boolean" />
+          <Property Name="LOGIN_BY" Type="Int32" />
+          <NavigationProperty Name="tbl_member" Relationship="Self.FK_tbl_images_ToTable" FromRole="tbl_images" ToRole="tbl_member" />
+        </EntityType>
+        <EntityType Name="tbl_member">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FIRSTNAME" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SURNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PASSWORD" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="MOBILE1" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="MOBILE2" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="DOB" Type="DateTime" Precision="3" />
+          <Property Name="IMAGE" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="BLOODGROUP" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="EDUCATION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RELATIONSHIP" Type="Int32" />
+          <Property Name="CREATED_DATE" Type="DateTime" Precision="3" />
+          <Property Name="MODIFIED_DATE" Type="DateTime" Precision="3" />
+          <Property Name="IS_ACTIVE" Type="Boolean" />
+          <Property Name="IS_DELETED" Type="Boolean" />
+          <Property Name="LOGIN_BY" Type="Int32" />
+          <NavigationProperty Name="tbl_address" Relationship="Self.FK_tbl_address_ToTable" FromRole="tbl_member" ToRole="tbl_address" />
+          <NavigationProperty Name="tbl_events" Relationship="Self.FK_tbl_events_ToTable" FromRole="tbl_member" ToRole="tbl_events" />
+          <NavigationProperty Name="tbl_groupadmin" Relationship="Self.FK_tbl_group2_ToTable" FromRole="tbl_member" ToRole="tbl_groupadmin" />
+          <NavigationProperty Name="tbl_images" Relationship="Self.FK_tbl_images_ToTable" FromRole="tbl_member" ToRole="tbl_images" />
+          <NavigationProperty Name="tbl_member_role" Relationship="Self.FK_tbl_member_role_ToTable" FromRole="tbl_member" ToRole="tbl_member_role" />
+          <NavigationProperty Name="tbl_relationship" Relationship="Self.FK_tbl_member_ToTable" FromRole="tbl_member" ToRole="tbl_relationship" />
+          <NavigationProperty Name="tbl_videos" Relationship="Self.FK_tbl_videos_ToTable" FromRole="tbl_member" ToRole="tbl_videos" />
+          <NavigationProperty Name="tbl_village" Relationship="Self.FK_tbl_village_ToTable" FromRole="tbl_member" ToRole="tbl_village" />
+        </EntityType>
+        <EntityType Name="tbl_member_role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MEMBER_ID" Type="Int32" />
+          <Property Name="MEMBER_ROLE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CREATED_DATE" Type="DateTime" Precision="3" />
+          <Property Name="MODIFIED_DATE" Type="DateTime" Precision="3" />
+          <Property Name="IS_DELETED" Type="Boolean" />
+          <Property Name="LOGIN_BY" Type="Int32" />
+          <NavigationProperty Name="tbl_member" Relationship="Self.FK_tbl_member_role_ToTable" FromRole="tbl_member_role" ToRole="tbl_member" />
+        </EntityType>
+        <EntityType Name="tbl_notification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GROUP_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MEMBER_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MESSAGE" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ADMIN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IS_NOTIFY" Type="Boolean" />
+          <Property Name="IS_DELETED" Type="Boolean" />
+          <Property Name="LOGIN_BY" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tbl_relationship">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RELATIONSHIP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IS_DELETED" Type="Boolean" />
+          <Property Name="LOGIN_BY" Type="Int32" />
+          <NavigationProperty Name="tbl_member" Relationship="Self.FK_tbl_member_ToTable" FromRole="tbl_relationship" ToRole="tbl_member" />
+        </EntityType>
+        <EntityType Name="tbl_surname">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SURNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IS_ACTIVE" Type="Boolean" />
+          <Property Name="IS_DELETED" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="LOGIN_BY" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tbl_videos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MEMBER_ID" Type="Int32" />
+          <Property Name="VIDEO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IS_ACTIVE" Type="Boolean" />
+          <Property Name="IS_DELETED" Type="Boolean" />
+          <Property Name="LOGIN_BY" Type="Int32" />
+          <NavigationProperty Name="tbl_member" Relationship="Self.FK_tbl_videos_ToTable" FromRole="tbl_videos" ToRole="tbl_member" />
+        </EntityType>
+        <EntityType Name="tbl_village">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MEMBER_ID" Type="Int32" />
+          <Property Name="VILLAGE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SUBDISTRICT" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DISTRICT" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IS_DELETED" Type="Boolean" />
+          <Property Name="LOGIN_BY" Type="Int32" />
+          <NavigationProperty Name="tbl_member" Relationship="Self.FK_tbl_village_ToTable" FromRole="tbl_village" ToRole="tbl_member" />
+        </EntityType>
+        <Association Name="FK_tbl_address_ToTable">
+          <End Role="tbl_member" Type="Self.tbl_member" Multiplicity="0..1" />
+          <End Role="tbl_address" Type="Self.tbl_address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_member">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbl_address">
+              <PropertyRef Name="MEMBER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_events_ToTable">
+          <End Role="tbl_member" Type="Self.tbl_member" Multiplicity="0..1" />
+          <End Role="tbl_events" Type="Self.tbl_events" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_member">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbl_events">
+              <PropertyRef Name="MEMBER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_group2_ToTable">
+          <End Role="tbl_member" Type="Self.tbl_member" Multiplicity="0..1" />
+          <End Role="tbl_groupadmin" Type="Self.tbl_groupadmin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_member">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbl_groupadmin">
+              <PropertyRef Name="MEMBER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_images_ToTable">
+          <End Role="tbl_member" Type="Self.tbl_member" Multiplicity="0..1" />
+          <End Role="tbl_images" Type="Self.tbl_images" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_member">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbl_images">
+              <PropertyRef Name="MEMBER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_member_role_ToTable">
+          <End Role="tbl_member" Type="Self.tbl_member" Multiplicity="0..1" />
+          <End Role="tbl_member_role" Type="Self.tbl_member_role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_member">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbl_member_role">
+              <PropertyRef Name="MEMBER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_member_ToTable">
+          <End Role="tbl_relationship" Type="Self.tbl_relationship" Multiplicity="0..1" />
+          <End Role="tbl_member" Type="Self.tbl_member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_relationship">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbl_member">
+              <PropertyRef Name="RELATIONSHIP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_videos_ToTable">
+          <End Role="tbl_member" Type="Self.tbl_member" Multiplicity="0..1" />
+          <End Role="tbl_videos" Type="Self.tbl_videos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_member">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbl_videos">
+              <PropertyRef Name="MEMBER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_village_ToTable">
+          <End Role="tbl_member" Type="Self.tbl_member" Multiplicity="0..1" />
+          <End Role="tbl_village" Type="Self.tbl_village" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_member">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tbl_village">
+              <PropertyRef Name="MEMBER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Database1Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tbl_address" EntityType="Self.tbl_address" />
+          <EntitySet Name="tbl_events" EntityType="Self.tbl_events" />
+          <EntitySet Name="tbl_groupadmin" EntityType="Self.tbl_groupadmin" />
+          <EntitySet Name="tbl_groupuser" EntityType="Self.tbl_groupuser" />
+          <EntitySet Name="tbl_images" EntityType="Self.tbl_images" />
+          <EntitySet Name="tbl_member" EntityType="Self.tbl_member" />
+          <EntitySet Name="tbl_member_role" EntityType="Self.tbl_member_role" />
+          <EntitySet Name="tbl_notification" EntityType="Self.tbl_notification" />
+          <EntitySet Name="tbl_relationship" EntityType="Self.tbl_relationship" />
+          <EntitySet Name="tbl_surname" EntityType="Self.tbl_surname" />
+          <EntitySet Name="tbl_videos" EntityType="Self.tbl_videos" />
+          <EntitySet Name="tbl_village" EntityType="Self.tbl_village" />
+          <AssociationSet Name="FK_tbl_address_ToTable" Association="Self.FK_tbl_address_ToTable">
+            <End Role="tbl_member" EntitySet="tbl_member" />
+            <End Role="tbl_address" EntitySet="tbl_address" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_events_ToTable" Association="Self.FK_tbl_events_ToTable">
+            <End Role="tbl_member" EntitySet="tbl_member" />
+            <End Role="tbl_events" EntitySet="tbl_events" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_group2_ToTable" Association="Self.FK_tbl_group2_ToTable">
+            <End Role="tbl_member" EntitySet="tbl_member" />
+            <End Role="tbl_groupadmin" EntitySet="tbl_groupadmin" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_images_ToTable" Association="Self.FK_tbl_images_ToTable">
+            <End Role="tbl_member" EntitySet="tbl_member" />
+            <End Role="tbl_images" EntitySet="tbl_images" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_member_role_ToTable" Association="Self.FK_tbl_member_role_ToTable">
+            <End Role="tbl_member" EntitySet="tbl_member" />
+            <End Role="tbl_member_role" EntitySet="tbl_member_role" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_member_ToTable" Association="Self.FK_tbl_member_ToTable">
+            <End Role="tbl_relationship" EntitySet="tbl_relationship" />
+            <End Role="tbl_member" EntitySet="tbl_member" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_videos_ToTable" Association="Self.FK_tbl_videos_ToTable">
+            <End Role="tbl_member" EntitySet="tbl_member" />
+            <End Role="tbl_videos" EntitySet="tbl_videos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_village_ToTable" Association="Self.FK_tbl_village_ToTable">
+            <End Role="tbl_member" EntitySet="tbl_member" />
+            <End Role="tbl_village" EntitySet="tbl_village" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Database1ModelStoreContainer" CdmEntityContainer="Database1Entities">
+          <EntitySetMapping Name="tbl_address">
+            <EntityTypeMapping TypeName="Database1Model.tbl_address">
+              <MappingFragment StoreEntitySet="tbl_address">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="MEMBER_ID" ColumnName="MEMBER_ID" />
+                <ScalarProperty Name="STREET" ColumnName="STREET" />
+                <ScalarProperty Name="CITY" ColumnName="CITY" />
+                <ScalarProperty Name="STATE" ColumnName="STATE" />
+                <ScalarProperty Name="PINCODE" ColumnName="PINCODE" />
+                <ScalarProperty Name="IS_ACTIVE" ColumnName="IS_ACTIVE" />
+                <ScalarProperty Name="IS_DELETED" ColumnName="IS_DELETED" />
+                <ScalarProperty Name="LOGIN_BY" ColumnName="LOGIN_BY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_events">
+            <EntityTypeMapping TypeName="Database1Model.tbl_events">
+              <MappingFragment StoreEntitySet="tbl_events">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="MEMBER_ID" ColumnName="MEMBER_ID" />
+                <ScalarProperty Name="EVENTNAME" ColumnName="EVENTNAME" />
+                <ScalarProperty Name="EVENTDATE" ColumnName="EVENTDATE" />
+                <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+                <ScalarProperty Name="IS_ACTIVE" ColumnName="IS_ACTIVE" />
+                <ScalarProperty Name="IS_DELETED" ColumnName="IS_DELETED" />
+                <ScalarProperty Name="LOGIN_BY" ColumnName="LOGIN_BY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_groupadmin">
+            <EntityTypeMapping TypeName="Database1Model.tbl_groupadmin">
+              <MappingFragment StoreEntitySet="tbl_groupadmin">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="MEMBER_ID" ColumnName="MEMBER_ID" />
+                <ScalarProperty Name="GROUP_NAME" ColumnName="GROUP_NAME" />
+                <ScalarProperty Name="IS_ACTIVE" ColumnName="IS_ACTIVE" />
+                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
+                <ScalarProperty Name="IS_DELETE" ColumnName="IS_DELETE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_groupuser">
+            <EntityTypeMapping TypeName="Database1Model.tbl_groupuser">
+              <MappingFragment StoreEntitySet="tbl_groupuser">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GROUP_NAME" ColumnName="GROUP_NAME" />
+                <ScalarProperty Name="MEMBER_NAME" ColumnName="MEMBER_NAME" />
+                <ScalarProperty Name="ISADMIN" ColumnName="ISADMIN" />
+                <ScalarProperty Name="USER_ADDED_DATE" ColumnName="USER_ADDED_DATE" />
+                <ScalarProperty Name="ISNOTIFY" ColumnName="ISNOTIFY" />
+                <ScalarProperty Name="ISACTIVE" ColumnName="ISACTIVE" />
+                <ScalarProperty Name="IS_DELETED" ColumnName="IS_DELETED" />
+                <ScalarProperty Name="LOGIN_BY" ColumnName="LOGIN_BY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_images">
+            <EntityTypeMapping TypeName="Database1Model.tbl_images">
+              <MappingFragment StoreEntitySet="tbl_images">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="MEMBER_ID" ColumnName="MEMBER_ID" />
+                <ScalarProperty Name="IMAGE" ColumnName="IMAGE" />
+                <ScalarProperty Name="IS_ACTIVE" ColumnName="IS_ACTIVE" />
+                <ScalarProperty Name="IS_DELETED" ColumnName="IS_DELETED" />
+                <ScalarProperty Name="LOGIN_BY" ColumnName="LOGIN_BY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_member">
+            <EntityTypeMapping TypeName="Database1Model.tbl_member">
+              <MappingFragment StoreEntitySet="tbl_member">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FIRSTNAME" ColumnName="FIRSTNAME" />
+                <ScalarProperty Name="SURNAME" ColumnName="SURNAME" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+                <ScalarProperty Name="MOBILE1" ColumnName="MOBILE1" />
+                <ScalarProperty Name="MOBILE2" ColumnName="MOBILE2" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="IMAGE" ColumnName="IMAGE" />
+                <ScalarProperty Name="BLOODGROUP" ColumnName="BLOODGROUP" />
+                <ScalarProperty Name="EDUCATION" ColumnName="EDUCATION" />
+                <ScalarProperty Name="RELATIONSHIP" ColumnName="RELATIONSHIP" />
+                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
+                <ScalarProperty Name="MODIFIED_DATE" ColumnName="MODIFIED_DATE" />
+                <ScalarProperty Name="IS_ACTIVE" ColumnName="IS_ACTIVE" />
+                <ScalarProperty Name="IS_DELETED" ColumnName="IS_DELETED" />
+                <ScalarProperty Name="LOGIN_BY" ColumnName="LOGIN_BY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_member_role">
+            <EntityTypeMapping TypeName="Database1Model.tbl_member_role">
+              <MappingFragment StoreEntitySet="tbl_member_role">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="MEMBER_ID" ColumnName="MEMBER_ID" />
+                <ScalarProperty Name="MEMBER_ROLE" ColumnName="MEMBER_ROLE" />
+                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
+                <ScalarProperty Name="MODIFIED_DATE" ColumnName="MODIFIED_DATE" />
+                <ScalarProperty Name="IS_DELETED" ColumnName="IS_DELETED" />
+                <ScalarProperty Name="LOGIN_BY" ColumnName="LOGIN_BY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_notification">
+            <EntityTypeMapping TypeName="Database1Model.tbl_notification">
+              <MappingFragment StoreEntitySet="tbl_notification">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GROUP_NAME" ColumnName="GROUP_NAME" />
+                <ScalarProperty Name="MEMBER_NAME" ColumnName="MEMBER_NAME" />
+                <ScalarProperty Name="MESSAGE" ColumnName="MESSAGE" />
+                <ScalarProperty Name="ADMIN" ColumnName="ADMIN" />
+                <ScalarProperty Name="IS_NOTIFY" ColumnName="IS_NOTIFY" />
+                <ScalarProperty Name="IS_DELETED" ColumnName="IS_DELETED" />
+                <ScalarProperty Name="LOGIN_BY" ColumnName="LOGIN_BY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_relationship">
+            <EntityTypeMapping TypeName="Database1Model.tbl_relationship">
+              <MappingFragment StoreEntitySet="tbl_relationship">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RELATIONSHIP" ColumnName="RELATIONSHIP" />
+                <ScalarProperty Name="IS_DELETED" ColumnName="IS_DELETED" />
+                <ScalarProperty Name="LOGIN_BY" ColumnName="LOGIN_BY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_surname">
+            <EntityTypeMapping TypeName="Database1Model.tbl_surname">
+              <MappingFragment StoreEntitySet="tbl_surname">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SURNAME" ColumnName="SURNAME" />
+                <ScalarProperty Name="IS_ACTIVE" ColumnName="IS_ACTIVE" />
+                <ScalarProperty Name="IS_DELETED" ColumnName="IS_DELETED" />
+                <ScalarProperty Name="LOGIN_BY" ColumnName="LOGIN_BY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_videos">
+            <EntityTypeMapping TypeName="Database1Model.tbl_videos">
+              <MappingFragment StoreEntitySet="tbl_videos">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="MEMBER_ID" ColumnName="MEMBER_ID" />
+                <ScalarProperty Name="VIDEO" ColumnName="VIDEO" />
+                <ScalarProperty Name="IS_ACTIVE" ColumnName="IS_ACTIVE" />
+                <ScalarProperty Name="IS_DELETED" ColumnName="IS_DELETED" />
+                <ScalarProperty Name="LOGIN_BY" ColumnName="LOGIN_BY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_village">
+            <EntityTypeMapping TypeName="Database1Model.tbl_village">
+              <MappingFragment StoreEntitySet="tbl_village">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="MEMBER_ID" ColumnName="MEMBER_ID" />
+                <ScalarProperty Name="VILLAGE" ColumnName="VILLAGE" />
+                <ScalarProperty Name="SUBDISTRICT" ColumnName="SUBDISTRICT" />
+                <ScalarProperty Name="DISTRICT" ColumnName="DISTRICT" />
+                <ScalarProperty Name="IS_DELETED" ColumnName="IS_DELETED" />
+                <ScalarProperty Name="LOGIN_BY" ColumnName="LOGIN_BY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
